@@ -3,21 +3,21 @@
 
 public class PlayerController : PhysicsObject
 {
+    private float horizontalInput;
+    private bool isJumpInput = false;
+
+
     protected override float CalcHorizontalVelocity()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
+        horizontalInput = Input.GetAxis("Horizontal");
         return horizontalInput * horizontalSpeed;
     }
 
     protected override float CalcVerticalVelocity()
     {
-        bool isJumpInput = Input.GetButtonDown("Jump");
-
-
-        Debug.LogFormat("isGrounded = {0}, isJumpInput = {1}", isGrounded, isJumpInput);
+        isJumpInput = Input.GetButton("Jump");
         if (isGrounded && isJumpInput)
         {
-            Debug.Log("Jump!");
             isGrounded = false;
             return jumpSpeed;
         }
