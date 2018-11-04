@@ -18,6 +18,7 @@ public class PhysicsObject : MonoBehaviour
     private Vector2 velocity;
     private float minCollisionNormal = 0.9f;
     private float collisionShell = 0.02f;
+    private float skinSpace = 0.005f;
 
 
     private void Awake()
@@ -58,16 +59,36 @@ public class PhysicsObject : MonoBehaviour
 
     private void CollisionCheck()
     {
-
         wasGrounded = isGrounded;
         isGrounded = false;
 
-        float distance = velocity.magnitude * fixedDeltaTime + collisionShell;
-        int count = rb2d.Cast(velocity, contactFilter2D, raycastHit2Ds, distance);
+        float newPositionX = rb2d.position.x;
+        float newPositionY = rb2d.position.y;
 
-        Debug.LogFormat("CollisionCheck(), count = {0}", count);
+        //float distance = velocity.magnitude * fixedDeltaTime + collisionShell;
 
-        for (int i = 0; i < count; i++)
+        float distanceX = velocity.x * fixedDeltaTime + collisionShell;
+        float distanceY = velocity.y * fixedDeltaTime + collisionShell;
+
+        int countX = rb2d.Cast(new Vector2(velocity.x, 0f), contactFilter2D, raycastHit2Ds, distanceX);
+        Debug.LogFormat("CollisionCheck(), countX = {0}", countX);
+
+        for (int i = 0; i < countX; i++)
+        {
+            Debug.LogFormat("Horizontal Collision, distance = {0}, normal = {1}, point = {2}", raycastHit2Ds[i].distance.ToString("F4"), raycastHit2Ds[i].normal.ToString("F4"), raycastHit2Ds[i].point.ToString("F4"));
+            // Horizontal Collision.
+            if (-raycastHit2Ds[i].normal.x * Mathf.Sign(velocity.x) > minCollisionNormal)
+            {
+                velocity = new Vector2(0f, velocity.y);
+                newPositionX = Mathf.Round(raycastHit2Ds[i].point.x) + Mathf.Sign(raycastHit2Ds[i].normal.x) * (0.5f + skinSpace);
+            }
+        }
+
+
+        int countY = rb2d.Cast(new Vector2(0f, velocity.y), contactFilter2D, raycastHit2Ds, distanceY);
+        Debug.LogFormat("CollisionCheck(), countY = {0}", countY);
+
+        for (int i = 0; i < countY; i++)
         {
             // Collide with ground.
             if (whatIsGround == (whatIsGround | (1 << raycastHit2Ds[i].collider.gameObject.layer)))
@@ -81,7 +102,7 @@ public class PhysicsObject : MonoBehaviour
                     if (!wasGrounded)
                     {
                         // Round the final y position, so that character wouldn't stuck in ground.
-                        rb2d.position = new Vector2(rb2d.position.x, Mathf.Round(raycastHit2Ds[i].point.y));
+                        newPositionY = Mathf.Round(raycastHit2Ds[i].point.y) + skinSpace;
                         OnLanded();
                     }
                 }
@@ -90,21 +111,17 @@ public class PhysicsObject : MonoBehaviour
                 {
                     Debug.Log("Up Collision.");
                     velocity = new Vector2(velocity.x, 0f);
-                    rb2d.position = new Vector2(rb2d.position.x, rb2d.position.y - raycastHit2Ds[i].distance * raycastHit2Ds[i].normal.y);
-                }
-                // Horizontal Collision.
-                if (-raycastHit2Ds[i].normal.x * Mathf.Sign(velocity.x) > minCollisionNormal)
-                {
-                    Debug.LogFormat("Horizontal Collision, distance = {0}, normal = {1}, point = {2}", raycastHit2Ds[i].distance.ToString("F4"), raycastHit2Ds[i].normal.x.ToString("F4"), raycastHit2Ds[i].point.ToString("F4"));
-                    velocity = new Vector2(0f, velocity.y);
-                    rb2d.position = new Vector2(Mathf.Round(raycastHit2Ds[i].point.x) + Mathf.Sign(raycastHit2Ds[i].normal.x) * 0.5f, rb2d.position.y);
+                    newPositionY = rb2d.position.y - raycastHit2Ds[i].distance * raycastHit2Ds[i].normal.y;
                 }
             }
         }
+
+        rb2d.position = new Vector2(newPositionX, newPositionY);
     }
 
     private void Move()
     {
+        Debug.LogFormat("velocity = {0}", velocity);
         rb2d.velocity = velocity;
 
         //Debug.LogFormat("velocity = {0}", velocity.ToString("F4"));
