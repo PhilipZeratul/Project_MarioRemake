@@ -61,8 +61,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\_Scripts\ControllerManager.cs" />
+    <Compile Include="Assets\_Scripts\GlobalInstaller.cs" />
     <Compile Include="Assets\_Scripts\Physics.cs" />
     <Compile Include="Assets\_Scripts\PhysicsObject.cs" />
+    <Compile Include="Assets\_Scripts\PlayerController.cs" />
     <Compile Include="Assets\_Scripts\Utilities\Constants.cs" />
     <Compile Include="Assets\_Scripts\Utilities\MyUtility.cs" />
     <Compile Include="Assets\3rd Party Assets\Tilemap\Brushes\Tint Brush Smooth\Scripts\TintTextureGenerator.cs" />
