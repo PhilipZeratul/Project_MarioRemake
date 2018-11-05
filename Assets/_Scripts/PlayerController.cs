@@ -6,9 +6,11 @@ public class PlayerController : MonoBehaviour
 {
     public float horizontalSpeed = 5f;
     public float jumpSpeed = 20f;
+    public float maxJumpHoldTime = 0.5f;
 
     private PhysicsObject physicsObject;
     private ControllerManager controllerManager;
+    private float jumpStartTime;
 
     [Inject]
     private void Init(ControllerManager _controllerManager)
@@ -28,10 +30,13 @@ public class PlayerController : MonoBehaviour
         if (physicsObject.IsGrounded() && controllerManager.JumpPressed())
         {
             physicsObject.Move(velocityX, jumpSpeed);
+            jumpStartTime = Time.time;
         }
-        else if (physicsObject.GetVelocityY() > 0f && !controllerManager.JumpHolding())
+        else if (physicsObject.GetVelocityY() > 0f && controllerManager.JumpHolding())
         {
-            physicsObject.Move(velocityX, physicsObject.GetVelocityY() / 2);
+            float time = Time.time;
+            if (time - jumpStartTime < maxJumpHoldTime)
+                physicsObject.Move(velocityX, jumpSpeed);
         }
         else
             physicsObject.Move(velocityX);

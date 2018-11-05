@@ -11,10 +11,6 @@ public class ControllerManager : MonoBehaviour
     private bool isJumpHolding;
     private bool isJumpReleased = true;
 
-    private float jumpButtonDownTimeStamp;
-    private float jumpButtonUpTimeStamp;
-    private float jumpTimeInterval;
-
 
     private void Update()
     {
