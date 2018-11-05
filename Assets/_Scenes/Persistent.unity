@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalSpeed: 5
-  jumpSpeed: 18
+  jumpSpeed: 17.2
 --- !u!114 &1626505110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +202,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityScale: 1
-  numOfRays: 3
+  numOfRaysX: 4
+  numOfRaysY: 3
   collider2d: {fileID: 2134074813}
 --- !u!4 &1626505111
 Transform:

@@ -5,7 +5,8 @@ public class PhysicsObject : MonoBehaviour
 {
     public float gravityScale = 1f;
 
-    public int numOfRays = 3;
+    public int numOfRaysX = 4;
+    public int numOfRaysY = 3;
     public Collider2D collider2d;
 
     private float velocityX;
@@ -13,7 +14,7 @@ public class PhysicsObject : MonoBehaviour
     private bool isGrounded;
     private float fixedDeltaTime;
     private Rect collisionRect;
-    private readonly float rayEdgeMargin = 0.1f;
+    private readonly float rayEdgeMargin = 0.02f;
     private ContactFilter2D filter;
     private RaycastHit2D[] hits = new RaycastHit2D[4];
 
@@ -28,12 +29,15 @@ public class PhysicsObject : MonoBehaviour
     private void FixedUpdate()
     {
         fixedDeltaTime = Time.fixedDeltaTime;
-        isGrounded = false;        
+        isGrounded = false;
+        GetNewCollisionRect();
+
+        float deltaX = velocityX * fixedDeltaTime;
+        if (!MyUtility.NearlyEqual(deltaX, 0f))
+            deltaX = XAxisCollision(deltaX);
 
         velocityY += gravityScale * Physics2D.gravity.y * fixedDeltaTime;
-
         float deltaY = YAxisCollision(velocityY * fixedDeltaTime);
-        float deltaX = XAxisCollision(velocityX * fixedDeltaTime);
 
         transform.Translate(deltaX, deltaY, 0f);
     }
@@ -51,23 +55,51 @@ public class PhysicsObject : MonoBehaviour
 
     private float XAxisCollision(float deltaX)
     {
-        return deltaX;
+        Vector2 rayStartPoint = new Vector2(collisionRect.center.x, collisionRect.yMin + rayEdgeMargin);
+        Vector2 rayEndPoint = new Vector2(collisionRect.center.x, collisionRect.yMax - rayEdgeMargin);
 
+        float distance = collisionRect.width / 2 + Mathf.Abs(deltaX);
+
+        float minDeltaX = deltaX > 0 ? float.MaxValue : float.MinValue;
+        for (int i = 0; i < numOfRaysX; i++)
+        {
+            float lerpAmount = (float)i / ((float)numOfRaysX - 1);
+            Vector2 origin = Vector2.Lerp(rayStartPoint, rayEndPoint, lerpAmount);
+
+            ///
+            Vector2 end = origin + new Vector2(Mathf.Sign(deltaX), 0f) * distance;
+            Debug.DrawLine(origin, end, Color.yellow);
+            ///
+
+            int count = Physics2D.Raycast(origin, new Vector2(Mathf.Sign(deltaX), 0f), filter, hits, distance);
+            for (int j = 0; j < count; j++)
+            {
+                float x = (hits[j].distance - collisionRect.width / 2) * Mathf.Sign(deltaX);
+                if (Mathf.Abs(minDeltaX) > Mathf.Abs(x))
+                    minDeltaX = x;
+            }
+        }
+
+        if ((deltaX > 0 && minDeltaX < deltaX) ||
+            (deltaX < 0 && minDeltaX > deltaX))
+        {
+            velocityX = 0f;
+            deltaX = minDeltaX;
+        }
+        return deltaX;
     }
 
     private float YAxisCollision(float deltaY)
-    {
-        GetNewCollisionRect();
-
+    {    
         Vector2 rayStartPoint = new Vector2(collisionRect.xMin + rayEdgeMargin, collisionRect.center.y);
         Vector2 rayEndPoint = new Vector2(collisionRect.xMax - rayEdgeMargin, collisionRect.center.y);
 
         float distance = collisionRect.height / 2 + Mathf.Abs(deltaY);
 
-        float minDeltaY = float.MaxValue;
-        for (int i = 0; i < numOfRays; i++)
+        float minDeltaY = deltaY > 0 ? float.MaxValue : float.MinValue;
+        for (int i = 0; i < numOfRaysY; i++)
         {
-            float lerpAmount = (float)i / ((float)numOfRays - 1);
+            float lerpAmount = (float)i / ((float)numOfRaysY - 1);
             Vector2 origin = Vector2.Lerp(rayStartPoint, rayEndPoint, lerpAmount);
 
             ///
@@ -84,12 +116,11 @@ public class PhysicsObject : MonoBehaviour
             }
         }
 
-        if (Mathf.Abs(minDeltaY) < Mathf.Abs(deltaY))
+        if ((deltaY > 0 && minDeltaY < deltaY) ||
+            (deltaY < 0 && minDeltaY > deltaY))
         {
-            if (Mathf.Sign(deltaY) < 0)
-            {
-                isGrounded = true;
-            }
+            // If going downwards.
+            isGrounded |= Mathf.Sign(deltaY) < 0;
 
             velocityY = 0f;
             deltaY = minDeltaY;
