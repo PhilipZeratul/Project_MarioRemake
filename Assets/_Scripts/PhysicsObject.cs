@@ -42,17 +42,6 @@ public class PhysicsObject : MonoBehaviour
         transform.Translate(deltaX, deltaY, 0f);
     }
 
-    public void Move(float inputVelocityX)
-    {
-        velocityX = inputVelocityX;
-    }
-
-    public void Move(float inputVelocityX, float inputVelocityY)
-    {
-        velocityX = inputVelocityX;
-        velocityY = inputVelocityY;
-    }
-
     private float XAxisCollision(float deltaX)
     {
         Vector2 rayStartPoint = new Vector2(collisionRect.center.x, collisionRect.yMin + rayEdgeMargin);
@@ -136,6 +125,27 @@ public class PhysicsObject : MonoBehaviour
             collider2d.bounds.size.x,
             collider2d.bounds.size.y
         );
+    }
+
+    public void Move(float inputVelocityX)
+    {
+        velocityX = inputVelocityX;
+    }
+
+    public void Move(float inputVelocityX, float inputVelocityY)
+    {
+        velocityX = inputVelocityX;
+        velocityY = inputVelocityY;
+    }
+
+    public float GetVelocityX()
+    {
+        return velocityX;
+    }
+
+    public float GetVelocityY()
+    {
+        return velocityY;
     }
 
     public bool IsGrounded()
