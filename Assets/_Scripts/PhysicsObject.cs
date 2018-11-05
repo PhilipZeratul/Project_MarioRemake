@@ -63,6 +63,9 @@ public class PhysicsObject : MonoBehaviour
             int count = Physics2D.Raycast(origin, new Vector2(Mathf.Sign(deltaX), 0f), filter, hits, distance);
             for (int j = 0; j < count; j++)
             {
+                if (hits[j].transform.IsChildOf(transform))
+                    continue;
+
                 float x = (hits[j].distance - collisionRect.width / 2) * Mathf.Sign(deltaX);
                 if (Mathf.Abs(minDeltaX) > Mathf.Abs(x))
                     minDeltaX = x;
@@ -99,6 +102,9 @@ public class PhysicsObject : MonoBehaviour
             int count = Physics2D.Raycast(origin, new Vector2(0f, Mathf.Sign(deltaY)), filter, hits, distance);
             for (int j = 0; j < count; j++)
             {
+                if (hits[j].transform.IsChildOf(transform))
+                    continue;
+
                 float y = (hits[j].distance - collisionRect.height / 2) * Mathf.Sign(deltaY);
                 if (Mathf.Abs(minDeltaY) > Mathf.Abs(y))
                     minDeltaY = y;
