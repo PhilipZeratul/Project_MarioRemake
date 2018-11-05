@@ -29,11 +29,13 @@ public class PlayerController : MonoBehaviour
         {
             physicsObject.Move(velocityX, jumpSpeed);
         }
-        else if (physicsObject.GetVelocityY() > 0f && !controllerManager.JumpPressed())
+        else if (physicsObject.GetVelocityY() > 0f && !controllerManager.JumpHolding())
         {
-            physicsObject.Move(velocityX, 0f);
+            physicsObject.Move(velocityX, physicsObject.GetVelocityY() / 2);
         }
         else
             physicsObject.Move(velocityX);
+
+        controllerManager.JumpPressedConsumed();
     }
 }

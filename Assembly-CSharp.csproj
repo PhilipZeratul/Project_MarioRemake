@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\_Scripts\CameraFollow.cs" />
     <Compile Include="Assets\_Scripts\ControllerManager.cs" />
     <Compile Include="Assets\_Scripts\GlobalInstaller.cs" />
     <Compile Include="Assets\_Scripts\Physics.cs" />

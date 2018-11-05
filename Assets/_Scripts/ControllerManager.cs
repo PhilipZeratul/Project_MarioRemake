@@ -8,6 +8,8 @@ public class ControllerManager : MonoBehaviour
     //~TODO: Consider input response carefully.
     private float horizontalInput;
     private bool isJumpPressed;
+    private bool isJumpHolding;
+    private bool isJumpReleased = true;
 
     private float jumpButtonDownTimeStamp;
     private float jumpButtonUpTimeStamp;
@@ -17,22 +19,12 @@ public class ControllerManager : MonoBehaviour
     private void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        isJumpPressed = Input.GetButton("Jump");
 
-        if (Input.GetButtonDown("Jump"))
-            jumpButtonDownTimeStamp = Time.time;
+        isJumpHolding = Input.GetButton("Jump");
+        if (!isJumpPressed)
+            isJumpPressed = Input.GetButtonDown("Jump");
+        isJumpReleased = Input.GetButtonUp("Jump");
 
-        if (Input.GetButtonUp("Jump"))
-        {
-            jumpButtonUpTimeStamp = Time.time;
-            jumpTimeInterval = jumpButtonUpTimeStamp - jumpButtonDownTimeStamp;
-        }
-
-        if (jumpTimeInterval > 0 && jumpTimeInterval < minJumpTime)
-        {
-            isJumpPressed = true;
-            jumpTimeInterval = Time.time - jumpButtonDownTimeStamp;
-        }
     }
 
     public float HorizontalMove()
@@ -45,5 +37,15 @@ public class ControllerManager : MonoBehaviour
     {
         //Debug.LogFormat("Input JumpPressed = {0}", isJumpPressed);
         return isJumpPressed;
+    }
+
+    public void JumpPressedConsumed()
+    {
+        isJumpPressed = false;
+    }
+
+    public bool JumpHolding()
+    {
+        return isJumpHolding;
     }
 }
