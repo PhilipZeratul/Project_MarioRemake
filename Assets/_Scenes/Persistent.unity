@@ -188,6 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e07b16713ac048b686d34199409136b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalSpeed: 5
+  jumpSpeed: 18
 --- !u!114 &1626505110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,8 +201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45aeaaa2a1c1b4d33baeec8ee9d0467d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSpeed: 8
-  jumpSpeed: 8
   gravityScale: 1
   numOfRays: 3
   collider2d: {fileID: 2134074813}

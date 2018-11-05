@@ -3,23 +3,28 @@
 
 public class ControllerManager : MonoBehaviour
 {
-    // Perhaps, respond differently according to game status
+    // Perhaps, respond differently according to game status.
+    //~TODO: Consider input response carefully.
+    private float horizontalInput;
+    private bool isJumpPressed;
 
 
-    //public float HorizontalMove()
-    //{
-
-    //}
-
-    //public bool OnJumpPressed()
-    //{
-
-    //}
-
-
-    public void Test()
+    private void Update()
     {
-        Debug.Log("ControllerManager.Test() success!");
+        horizontalInput = Input.GetAxis("Horizontal");
+
+        isJumpPressed = Input.GetButton("Jump");
     }
 
+    public float HorizontalMove()
+    {
+        //Debug.LogFormat("Input HorizontalMove = {0}", horizontalInput);
+        return horizontalInput;
+    }
+
+    public bool JumpPressed()
+    {
+        //Debug.LogFormat("Input JumpPressed = {0}", isJumpPressed);
+        return isJumpPressed;
+    }
 }

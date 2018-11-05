@@ -4,7 +4,11 @@ using Zenject;
 
 public class PlayerController : MonoBehaviour
 {
-    ControllerManager controllerManager;
+    public float horizontalSpeed = 5f;
+    public float jumpSpeed = 20f;
+
+    private PhysicsObject physicsObject;
+    private ControllerManager controllerManager;
 
     [Inject]
     private void Init(ControllerManager _controllerManager)
@@ -14,6 +18,18 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        controllerManager.Test();
+        physicsObject = GetComponent<PhysicsObject>();
+    }
+
+    private void FixedUpdate()
+    {
+        float velocityX = controllerManager.HorizontalMove() * horizontalSpeed;
+
+        if (physicsObject.IsGrounded() && controllerManager.JumpPressed())
+        {
+            physicsObject.Move(velocityX, jumpSpeed);
+        }
+        else
+            physicsObject.Move(velocityX);
     }
 }
