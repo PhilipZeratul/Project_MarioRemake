@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 2134074811}
   - component: {fileID: 2134074812}
   - component: {fileID: 2134074813}
+  - component: {fileID: 2134074814}
   m_Layer: 8
   m_Name: BigMario
   m_TagString: Untagged
@@ -412,3 +413,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.8127065}
   m_EdgeRadius: 0
+--- !u!95 &2134074814
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2134074810}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f7f12f27433884250ad98a05b157f522, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
