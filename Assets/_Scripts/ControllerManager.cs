@@ -7,6 +7,8 @@ public class ControllerManager : MonoBehaviour
     // Perhaps, respond differently according to game status.
     //~TODO: Consider input response carefully.
     private float horizontalInput;
+    private bool isLeftPressed;
+    private bool isRightPressed;
     private bool isJumpPressed;
     private bool isJumpHolding;
     private bool isJumpReleased = true;
@@ -15,6 +17,8 @@ public class ControllerManager : MonoBehaviour
     private void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
+        isLeftPressed = Input.GetButton("Left");
+        isRightPressed = Input.GetButton("Right");
 
         isJumpHolding = Input.GetButton("Jump");
         if (!isJumpPressed)
@@ -43,5 +47,15 @@ public class ControllerManager : MonoBehaviour
     public bool JumpHolding()
     {
         return isJumpHolding;
+    }
+
+    public bool IsLeftPressed()
+    {
+        return isLeftPressed;
+    }
+
+    public bool IsRightPressed()
+    {
+        return isRightPressed;
     }
 }

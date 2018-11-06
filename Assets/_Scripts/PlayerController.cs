@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private readonly int jumpHash = Animator.StringToHash("Jump");
     private readonly int isGroundedHash = Animator.StringToHash("IsGrounded");
     private readonly int isRunningHash = Animator.StringToHash("IsRunning");
+    private readonly int isTurningHash = Animator.StringToHash("IsTurning");
 
 
     [Inject]
@@ -35,6 +36,12 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool(isGroundedHash, physicsObject.IsGrounded());
         animator.SetBool(isRunningHash, !MyUtility.NearlyEqual(physicsObject.GetVelocityX(), 0f));
+
+        if ((physicsObject.GetVelocityX() > 0 && controllerManager.IsLeftPressed()) ||
+            (physicsObject.GetVelocityX() < 0 && controllerManager.IsRightPressed()))
+            animator.SetBool(isTurningHash, true);
+        else
+            animator.SetBool(isTurningHash, false);
     }
 
     private void FixedUpdate()
