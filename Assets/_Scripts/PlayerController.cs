@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float maxHorizontalSpeed = 5f;
     public float jumpSpeed = 20f;
     public float maxJumpHoldTime = 0.5f;
+    public float animationPlaybackMultiplier = 0.2f;
+    public float minAnimationPlaybackMultiplier = 0.5f;
 
     private PhysicsObject physicsObject;
     private ControllerManager controllerManager;
@@ -97,15 +99,12 @@ public class PlayerController : MonoBehaviour
         if ((velocityX > 0 && !isFacingRight) || (velocityX < 0 && isFacingRight))
             Flip();
 
-        animator.SetFloat(runSpeedHash, velocityX);
+        if (!MyUtility.NearlyEqual(velocityX, 0f))
+            animator.SetFloat(runSpeedHash, Mathf.Max(Mathf.Abs(animationPlaybackMultiplier * velocityX), minAnimationPlaybackMultiplier));
     }
 
     private void Flip()
     {
-        //
-        Debug.LogFormat("Flip, velocityX = {0}", velocityX);
-
-
         isFacingRight = !isFacingRight;
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
