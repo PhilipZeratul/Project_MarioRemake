@@ -68,7 +68,7 @@
     <Compile Include="Assets\_Scripts\GameControl\GlobalInstaller.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Brick.cs" />
     <Compile Include="Assets\_Scripts\Interactable\IInteractableObject.cs" />
-    <Compile Include="Assets\_Scripts\Particle\BrickFragParticle.cs" />
+    <Compile Include="Assets\_Scripts\Particle\SelfDestroyTimer.cs" />
     <Compile Include="Assets\_Scripts\Utilities\Constants.cs" />
     <Compile Include="Assets\_Scripts\Utilities\MyUtility.cs" />
     <Compile Include="Assets\3rd Party Assets\Tilemap\Brushes\Tint Brush Smooth\Scripts\TintTextureGenerator.cs" />
