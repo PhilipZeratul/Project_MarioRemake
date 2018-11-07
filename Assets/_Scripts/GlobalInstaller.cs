@@ -9,7 +9,7 @@ public class GlobalInstaller : MonoInstaller<GlobalInstaller>
 
     public override void InstallBindings()
     {
-        Debug.Log("Global Installer Binding.");
+        //Debug.Log("Global Installer Binding.");
 
         Container.Bind<ControllerManager>().FromInstance(controllerManager).AsSingle();
     }

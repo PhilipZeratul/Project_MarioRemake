@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private ControllerManager controllerManager;
     private float jumpStartTime;
     private bool isFacingRight = true;
+    private bool isTurning;
     private float velocityX;
 
     private Animator animator;
@@ -42,11 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool(isGroundedHash, physicsObject.IsGrounded());
         animator.SetBool(isRunningHash, !MyUtility.NearlyEqual(physicsObject.GetVelocityX(), 0f));
-
-        if (physicsObject.GetVelocityX() * controllerManager.HorizontalInput() < 0)
-            animator.SetBool(isTurningHash, true);
-        else
-            animator.SetBool(isTurningHash, false);
+        animator.SetBool(isTurningHash, isTurning);
     }
 
     private void FixedUpdate()
@@ -59,32 +56,38 @@ public class PlayerController : MonoBehaviour
     private void HorizontalMove()
     {
         velocityX = physicsObject.GetVelocityX();
-        float accX;
+        float accX = 0f;
         float horizontalInput = controllerManager.HorizontalInput();
 
-        if (MyUtility.NearlyEqual(horizontalInput, 0f))
+        if (isTurning)
         {
-            if (!MyUtility.NearlyEqual(velocityX, 0f))
-                accX = -Mathf.Sign(velocityX) * horizontalAcc * 2f;
+            if (MyUtility.NearlyEqual(velocityX, 0f))
+                isTurning = false;
             else
-                accX = 0f;
-        }
-        else 
-        {
-            if (Mathf.Sign(horizontalInput) * Mathf.Sign(velocityX) < 0)
-            {
                 accX = -Mathf.Sign(velocityX) * horizontalAcc * 3f;
+        }
+        else
+        {
+            // No Input
+            if (MyUtility.NearlyEqual(horizontalInput, 0f))
+            {
+                if (!MyUtility.NearlyEqual(velocityX, 0f))
+                    accX = -Mathf.Sign(velocityX) * horizontalAcc * 2f;
             }
+            // Have Input
             else
             {
-                if (Mathf.Abs(velocityX) > maxHorizontalSpeed)
-                    accX = 0f;
-                else
+                // Issue Turning
+                if (horizontalInput * velocityX < -0.1f)
                 {
-                    accX = Mathf.Sign(velocityX) * horizontalAcc;
+                    isTurning = true;
+                }
+                else if (Mathf.Abs(velocityX) < maxHorizontalSpeed)
+                {
+                    accX = Mathf.Sign(horizontalInput) * horizontalAcc;
 
                     if (Mathf.Abs(velocityX) < minHorizontalSpeed)
-                        velocityX = Mathf.Sign(velocityX) * minHorizontalSpeed;
+                        velocityX = Mathf.Sign(accX) * minHorizontalSpeed;
                 }
             }
         }
@@ -100,7 +103,7 @@ public class PlayerController : MonoBehaviour
             Flip();
 
         if (!MyUtility.NearlyEqual(velocityX, 0f))
-            animator.SetFloat(runSpeedHash, Mathf.Max(Mathf.Abs(animationPlaybackMultiplier * velocityX), minAnimationPlaybackMultiplier));
+            animator.SetFloat(runSpeedHash, Mathf.Max(Mathf.Abs(animationPlaybackMultiplier * velocityX), minAnimationPlaybackMultiplier));            
     }
 
     private void Flip()
