@@ -1,11 +1,11 @@
 ﻿<Properties StartupConfiguration="{F19A09F7-5AE3-DFCA-24D3-F1F802084352}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/PlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/Utilities/Constants.cs">
     <Files>
-      <File FileName="Assets/_Scripts/GlobalInstaller.cs" Line="14" Column="44" />
-      <File FileName="Assets/_Scripts/PhysicsObject.cs" Line="148" Column="26" />
-      <File FileName="Assets/_Scripts/ControllerManager.cs" Line="33" Column="34" />
-      <File FileName="Assets/_Scripts/PlayerController.cs" Line="20" Column="6" />
+      <File FileName="Assets/_Scripts/Character/PhysicsObject.cs" Line="147" Column="41" />
+      <File FileName="Assets/_Scripts/Interactable/InteractableObject.cs" Line="8" Column="1" />
+      <File FileName="Assets/_Scripts/Interactable/Brick.cs" Line="8" Column="1" />
+      <File FileName="Assets/_Scripts/Utilities/Constants.cs" Line="10" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

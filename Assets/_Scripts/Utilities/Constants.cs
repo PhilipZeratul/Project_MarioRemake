@@ -6,4 +6,12 @@
         public const string Enemy = "Enemy";
         public const string Ground = "Ground";
     }
+
+    public enum HitDirection
+    {
+        Left,
+        Right,
+        Top,
+        Bottom
+    }
 }
