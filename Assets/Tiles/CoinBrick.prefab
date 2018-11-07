@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4363958496485854}
   - component: {fileID: 212405126731223340}
   - component: {fileID: 61968739236473302}
-  m_Layer: 0
+  - component: {fileID: 95415471814588016}
+  m_Layer: 10
   m_Name: CoinBrick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,6 +67,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &95415471814588016
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1135805705875646}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 75e3c2304a6934991a2b8fe4d161b796, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &212405126731223340
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4514354906974550}
   - component: {fileID: 212010009325008420}
   - component: {fileID: 61992572406929112}
+  - component: {fileID: 114720543492421540}
   m_Layer: 10
   m_Name: BrickTile_Interactable
   m_TagString: Untagged
@@ -66,6 +67,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114720543492421540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1438892067652844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36fdb47d2466b4b46a25e7a12e752b28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brickBreakParticleGO: {fileID: 1178487665399394, guid: 918965201f7fd423a83d43da17676302,
+    type: 2}
 --- !u!212 &212010009325008420
 SpriteRenderer:
   m_ObjectHideFlags: 1
