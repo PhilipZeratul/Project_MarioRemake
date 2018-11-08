@@ -9,6 +9,7 @@ public class PhysicsObject : MonoBehaviour
     public int numOfRaysX = 4;
     public int numOfRaysY = 3;
     public Collider2D collider2d;
+    public float pushSpeed = 5f;
 
     private float velocityX;
     private float velocityY;
@@ -33,14 +34,18 @@ public class PhysicsObject : MonoBehaviour
         isGrounded = false;
         GetNewCollisionRect();
 
+        // X
         float deltaX = velocityX * fixedDeltaTime;
         if (!MyUtility.NearlyEqual(deltaX, 0f))
             deltaX = XAxisCollision(deltaX);
 
+        // Y
+        float deltaY = 0;
         velocityY += gravityScale * Physics2D.gravity.y * fixedDeltaTime;
         velocityY = velocityY < maxFallSpeed ? maxFallSpeed : velocityY;
-
-        float deltaY = YAxisCollision(velocityY * fixedDeltaTime);
+        deltaY = velocityY <= 0 ?
+            YDownCollision(velocityY * fixedDeltaTime) :
+            YUpCollision(velocityY * fixedDeltaTime, ref deltaX);
 
         transform.Translate(deltaX, deltaY, 0f);
     }
@@ -93,15 +98,16 @@ public class PhysicsObject : MonoBehaviour
         return deltaX;
     }
 
-    private float YAxisCollision(float deltaY)
+    private float YDownCollision(float deltaY)
     {    
         Vector2 rayStartPoint = new Vector2(collisionRect.xMin + rayEdgeMargin, collisionRect.center.y);
         Vector2 rayEndPoint = new Vector2(collisionRect.xMax - rayEdgeMargin, collisionRect.center.y);
 
         float distance = collisionRect.height / 2 + Mathf.Abs(deltaY);
 
-        float minDeltaY = deltaY > 0 ? float.MaxValue : float.MinValue;
+        float minDeltaY = float.MinValue;
         GameObject hitTarget = null;
+
         for (int i = 0; i < numOfRaysY; i++)
         {
             float lerpAmount = (float)i / ((float)numOfRaysY - 1);
@@ -112,14 +118,15 @@ public class PhysicsObject : MonoBehaviour
             Debug.DrawLine(origin, end, Color.white);
             ///
 
-            int count = Physics2D.Raycast(origin, new Vector2(0f, Mathf.Sign(deltaY)), filter, hits, distance);
+            int count = Physics2D.Raycast(origin, Vector2.down, filter, hits, distance);
             for (int j = 0; j < count; j++)
             {
                 if (hits[j].transform.IsChildOf(transform))
-                    continue;
+                    continue;                    
 
-                float y = (hits[j].distance - collisionRect.height / 2) * Mathf.Sign(deltaY);
-                if (Mathf.Abs(minDeltaY) > Mathf.Abs(y))
+                // Hit
+                float y = -(hits[j].distance - collisionRect.height / 2);
+                if (minDeltaY < y)
                 {
                     minDeltaY = y;
                     hitTarget = hits[j].collider.gameObject;
@@ -127,17 +134,92 @@ public class PhysicsObject : MonoBehaviour
             }
         }
 
-        if ((deltaY > 0 && minDeltaY < deltaY) ||
-            (deltaY < 0 && minDeltaY > deltaY))
+        if (minDeltaY > deltaY)
         {
             // If going downwards.
-            isGrounded |= Mathf.Sign(deltaY) < 0;
+            isGrounded = true;
 
             velocityY = 0f;
             deltaY = minDeltaY;
 
             if (hitTarget != null)
+                Hit(hitTarget, deltaY > 0 ? Constants.HitDirection.Bottom : Constants.HitDirection.Top);          
+        }
+        return deltaY;
+    }
+
+    // YAxisCollision can change deltaX when jumping up and pushed sideways to be able to jump on platform.
+    private float YUpCollision(float deltaY, ref float deltaX)
+    {
+        Vector2 rayStartPoint = new Vector2(collisionRect.xMin + rayEdgeMargin, collisionRect.center.y);
+        Vector2 rayEndPoint = new Vector2(collisionRect.xMax - rayEdgeMargin, collisionRect.center.y);
+
+        float distance = collisionRect.height / 2 + deltaY;
+
+        float minDeltaY = float.MaxValue;
+        GameObject hitTarget = null;
+
+
+        int hitRayNo = 0;
+        bool isMiddleHitGround = false;
+
+
+
+
+        for (int i = 0; i < numOfRaysY; i++)
+        {
+            float lerpAmount = (float)i / ((float)numOfRaysY - 1);
+            Vector2 origin = Vector2.Lerp(rayStartPoint, rayEndPoint, lerpAmount);
+
+            ///
+            Vector2 end = origin + new Vector2(0f, Mathf.Sign(deltaY)) * distance;
+            Debug.DrawLine(origin, end, Color.white);
+            ///
+
+            int count = Physics2D.Raycast(origin, Vector2.up, filter, hits, distance);
+            for (int j = 0; j < count; j++)
+            {
+                if (hits[j].transform.IsChildOf(transform))
+                    continue;
+
+                // Hit
+                //~TODO: Fix this for general use.
+                // The middle ray shotting up hitted ground
+                if (i == 1 && hits[j].collider.gameObject.layer == LayerMask.NameToLayer(Constants.LayerNames.Ground))
+                {
+                    isMiddleHitGround = true;
+                }
+
+                float y = hits[j].distance - collisionRect.height / 2;
+                if (minDeltaY > y)
+                {
+                    minDeltaY = y;
+                    hitTarget = hits[j].collider.gameObject;
+                    hitRayNo = i;
+                }
+            }
+        }
+
+        if (minDeltaY < deltaY && hitTarget != null)
+        {
+            if (!isMiddleHitGround && hitTarget.layer == LayerMask.NameToLayer(Constants.LayerNames.Ground))
+            {
+                if (hitRayNo == 0)
+                {
+                    deltaX += pushSpeed * Time.fixedDeltaTime;
+                }
+                else if (hitRayNo == 2)
+                {
+                    deltaX -= pushSpeed * Time.fixedDeltaTime;
+                }
+            }
+            else
+            {
+                velocityY = 0f;
+                deltaY = minDeltaY;
                 Hit(hitTarget, deltaY > 0 ? Constants.HitDirection.Bottom : Constants.HitDirection.Top);
+            }
+
         }
         return deltaY;
     }

@@ -211,6 +211,7 @@ MonoBehaviour:
   numOfRaysX: 4
   numOfRaysY: 3
   collider2d: {fileID: 2134074813}
+  pushSpeed: 5
 --- !u!4 &1626505111
 Transform:
   m_ObjectHideFlags: 0
