@@ -4,6 +4,7 @@
 public class PhysicsObject : MonoBehaviour
 {
     public float gravityScale = 1f;
+    public float maxFallSpeed = -15f;
 
     public int numOfRaysX = 4;
     public int numOfRaysY = 3;
@@ -37,6 +38,8 @@ public class PhysicsObject : MonoBehaviour
             deltaX = XAxisCollision(deltaX);
 
         velocityY += gravityScale * Physics2D.gravity.y * fixedDeltaTime;
+        velocityY = velocityY < maxFallSpeed ? maxFallSpeed : velocityY;
+
         float deltaY = YAxisCollision(velocityY * fixedDeltaTime);
 
         transform.Translate(deltaX, deltaY, 0f);
@@ -57,8 +60,8 @@ public class PhysicsObject : MonoBehaviour
             Vector2 origin = Vector2.Lerp(rayStartPoint, rayEndPoint, lerpAmount);
 
             ///
-            //Vector2 end = origin + new Vector2(Mathf.Sign(deltaX), 0f) * distance;
-            //Debug.DrawLine(origin, end, Color.yellow);
+            Vector2 end = origin + new Vector2(Mathf.Sign(deltaX), 0f) * distance;
+            Debug.DrawLine(origin, end, Color.yellow);
             ///
 
             int count = Physics2D.Raycast(origin, new Vector2(Mathf.Sign(deltaX), 0f), filter, hits, distance);
@@ -105,8 +108,8 @@ public class PhysicsObject : MonoBehaviour
             Vector2 origin = Vector2.Lerp(rayStartPoint, rayEndPoint, lerpAmount);
 
             ///
-            //Vector2 end = origin + new Vector2(0f, Mathf.Sign(deltaY)) * distance;
-            //Debug.DrawLine(origin, end, Color.white);
+            Vector2 end = origin + new Vector2(0f, Mathf.Sign(deltaY)) * distance;
+            Debug.DrawLine(origin, end, Color.white);
             ///
 
             int count = Physics2D.Raycast(origin, new Vector2(0f, Mathf.Sign(deltaY)), filter, hits, distance);
