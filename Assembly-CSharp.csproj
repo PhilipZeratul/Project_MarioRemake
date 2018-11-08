@@ -67,6 +67,7 @@
     <Compile Include="Assets\_Scripts\GameControl\ControllerManager.cs" />
     <Compile Include="Assets\_Scripts\GameControl\GlobalInstaller.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Brick.cs" />
+    <Compile Include="Assets\_Scripts\Interactable\CoinBrick.cs" />
     <Compile Include="Assets\_Scripts\Interactable\IInteractableObject.cs" />
     <Compile Include="Assets\_Scripts\Particle\SelfDestroyTimer.cs" />
     <Compile Include="Assets\_Scripts\Utilities\Constants.cs" />

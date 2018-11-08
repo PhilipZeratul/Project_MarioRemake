@@ -6,9 +6,9 @@ public class Brick : MonoBehaviour, IInteractableObject
     public GameObject brickBreakParticleGO;
 
 
-    public void IsHit(GameObject source, Constants.HitDirection dir)
+    public void IsHit(GameObject source, Constants.HitDirection from)
     {
-        if (dir == Constants.HitDirection.Bottom)
+        if (from == Constants.HitDirection.Bottom)
         {
 
             Instantiate(brickBreakParticleGO, transform.position, transform.rotation);

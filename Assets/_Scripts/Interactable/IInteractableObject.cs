@@ -3,5 +3,5 @@
 
 public interface IInteractableObject
 {
-    void IsHit(GameObject source, Constants.HitDirection dir);
+    void IsHit(GameObject source, Constants.HitDirection from);
 }
