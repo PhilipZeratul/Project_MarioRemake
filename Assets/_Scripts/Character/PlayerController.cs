@@ -5,6 +5,7 @@ using Zenject;
 public class PlayerController : MonoBehaviour
 {
     public float horizontalAcc = 5f;
+    public float sprintAdder = 1.5f;
     public float minHorizontalSpeed = 1f;
     public float maxHorizontalSpeed = 5f;
     public float jumpSpeed = 20f;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private float jumpStartTime;
     private bool isFacingRight = true;
     private bool isTurning;
+    private bool isSprinting;
     private float velocityX;
 
     private Animator animator;
@@ -59,12 +61,19 @@ public class PlayerController : MonoBehaviour
         float accX = 0f;
         float horizontalInput = controllerManager.HorizontalInput();
 
+        float maxSpeed = controllerManager.SprintHolding() ?
+                             maxHorizontalSpeed + sprintAdder : maxHorizontalSpeed;
+        float minSpeed = controllerManager.SprintHolding() ?
+                             minHorizontalSpeed + sprintAdder : minHorizontalSpeed;                                          
+
         if (isTurning)
         {
             if (MyUtility.NearlyEqual(velocityX, 0f))
                 isTurning = false;
             else
-                accX = -Mathf.Sign(velocityX) * horizontalAcc * 3f;
+                accX = controllerManager.SprintHolding() ?
+                           -Mathf.Sign(velocityX) * horizontalAcc * 4f :
+                           -Mathf.Sign(velocityX) * horizontalAcc * 3f;
         }
         else
         {
@@ -82,12 +91,14 @@ public class PlayerController : MonoBehaviour
                 {
                     isTurning = true;
                 }
-                else if (Mathf.Abs(velocityX) < maxHorizontalSpeed)
+                else if (Mathf.Abs(velocityX) < maxSpeed)                         
                 {
-                    accX = Mathf.Sign(horizontalInput) * horizontalAcc;
+                    accX = controllerManager.SprintHolding() ?
+                               Mathf.Sign(horizontalInput) * horizontalAcc * 2 :
+                               Mathf.Sign(horizontalInput) * horizontalAcc;
 
-                    if (Mathf.Abs(velocityX) < minHorizontalSpeed)
-                        velocityX = Mathf.Sign(accX) * minHorizontalSpeed;
+                    if (Mathf.Abs(velocityX) < minSpeed)
+                        velocityX = Mathf.Sign(accX) * minSpeed;
                 }
             }
         }
@@ -98,6 +109,9 @@ public class PlayerController : MonoBehaviour
                 Mathf.Min(0f, velocityX + accX * Time.fixedDeltaTime);
         else
             velocityX += accX * Time.fixedDeltaTime;
+
+        if (Mathf.Abs(velocityX) > maxSpeed)
+            velocityX = Mathf.Sign(velocityX) * maxSpeed;
 
         if ((velocityX > 0 && !isFacingRight) || (velocityX < 0 && isFacingRight))
             Flip();

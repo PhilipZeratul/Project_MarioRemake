@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalAcc: 5
+  sprintAdder: 1.5
   minHorizontalSpeed: 2
   maxHorizontalSpeed: 9
   jumpSpeed: 11
@@ -235,6 +236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1641787955}
   - component: {fileID: 1641787954}
+  - component: {fileID: 1641787957}
   - component: {fileID: 1641787953}
   - component: {fileID: 1641787956}
   m_Layer: 0
@@ -317,6 +319,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1626505108}
   offset: 3.5
+--- !u!114 &1641787957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1641787952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AssetsPPU: 16
+  m_RefResolutionX: 256
+  m_RefResolutionY: 256
+  m_UpscaleRT: 0
+  m_PixelSnapping: 0
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0
 --- !u!1 &2134074810
 GameObject:
   m_ObjectHideFlags: 0
