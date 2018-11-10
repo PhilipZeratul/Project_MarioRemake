@@ -12,21 +12,26 @@ public class PlayerController : MonoBehaviour
     public float maxJumpHoldTime = 0.5f;
     public float animationPlaybackMultiplier = 0.2f;
     public float minAnimationPlaybackMultiplier = 0.5f;
+    public Collider2D smallMarioCollider;
+    public Collider2D bigMarioCollider;
 
     private PhysicsObject physicsObject;
     private ControllerManager controllerManager;
     private float jumpStartTime;
     private bool isFacingRight = true;
     private bool isTurning;
-    private bool isSprinting;
     private float velocityX;
+    private bool isBigMario;
 
     private Animator animator;
-    private readonly int jumpHash = Animator.StringToHash("Jump");
+    private readonly int jumpHash = Animator.StringToHash("TriggerJump");
     private readonly int isGroundedHash = Animator.StringToHash("IsGrounded");
     private readonly int isRunningHash = Animator.StringToHash("IsRunning");
     private readonly int isTurningHash = Animator.StringToHash("IsTurning");
     private readonly int runSpeedHash = Animator.StringToHash("RunSpeed");
+    private readonly int isBigHash = Animator.StringToHash("IsBig");
+    private readonly int triggerBigHash = Animator.StringToHash("TriggerToBig");
+    private readonly int triggerSmallHash = Animator.StringToHash("TriggerToSmall");
 
 
     [Inject]
@@ -145,5 +150,44 @@ public class PlayerController : MonoBehaviour
             physicsObject.Move(velocityX);
 
         controllerManager.JumpPressedConsumed();
+    }
+
+    public void ChangeToBig()
+    {
+        if (isBigMario)
+            return;
+
+        isBigMario = true;
+        animator.SetTrigger(triggerBigHash);
+        animator.SetBool(isBigHash, true);
+        bigMarioCollider.enabled = true;
+        smallMarioCollider.enabled = false;
+        physicsObject.collider2d = bigMarioCollider;
+    }
+
+    public void ChangeToSmall()
+    {
+        if (!isBigMario)
+            return;
+
+        isBigMario = false;
+        animator.SetTrigger(triggerSmallHash);
+        animator.SetBool(isBigHash, false);
+        bigMarioCollider.enabled = false;
+        smallMarioCollider.enabled = true;
+        physicsObject.collider2d = smallMarioCollider;
+    }
+
+    public void HitByEnemy()
+    {
+        if (isBigMario)
+            ChangeToSmall();
+        else
+            Die();
+    }
+
+    private void Die()
+    {
+        Debug.Log("Mario Die()");
     }
 }
