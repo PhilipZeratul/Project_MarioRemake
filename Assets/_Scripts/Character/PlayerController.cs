@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using Zenject;
 
 
@@ -14,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public float minAnimationPlaybackMultiplier = 0.5f;
     public Collider2D smallMarioCollider;
     public Collider2D bigMarioCollider;
+    public float unMoveableDuration = 1f;
+    public float invincibleDuration = 1.5f;
 
     private PhysicsObject physicsObject;
     private ControllerManager controllerManager;
@@ -22,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private bool isTurning;
     private float velocityX;
     private bool isBigMario;
+    private WaitForSeconds waitForMoveable;
 
     private Animator animator;
     private readonly int jumpHash = Animator.StringToHash("TriggerJump");
@@ -44,6 +48,8 @@ public class PlayerController : MonoBehaviour
     {
         physicsObject = GetComponent<PhysicsObject>();
         animator = GetComponentInChildren<Animator>();
+
+        waitForMoveable = new WaitForSeconds(unMoveableDuration);
     }
 
     private void Update()
@@ -163,6 +169,9 @@ public class PlayerController : MonoBehaviour
         bigMarioCollider.enabled = true;
         smallMarioCollider.enabled = false;
         physicsObject.collider2d = bigMarioCollider;
+
+        StartCoroutine(WaitForMoveable());
+        StartCoroutine(WaitForInvincible(invincibleDuration));
     }
 
     public void ChangeToSmall()
@@ -176,10 +185,16 @@ public class PlayerController : MonoBehaviour
         bigMarioCollider.enabled = false;
         smallMarioCollider.enabled = true;
         physicsObject.collider2d = smallMarioCollider;
+
+        StartCoroutine(WaitForMoveable());
+        StartCoroutine(WaitForInvincible(invincibleDuration));
     }
 
     public void HitByEnemy()
     {
+        if (physicsObject.GetInvincible())
+            return;
+
         if (isBigMario)
             ChangeToSmall();
         else
@@ -189,5 +204,19 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         Debug.Log("Mario Die()");
+    }
+
+    private IEnumerator WaitForMoveable()
+    {
+        physicsObject.SetMoveable(false);
+        yield return waitForMoveable;
+        physicsObject.SetMoveable(true);
+    }
+
+    private IEnumerator WaitForInvincible(float seconds)
+    {
+        physicsObject.SetInvincible(true);
+        yield return new WaitForSeconds(seconds);
+        physicsObject.SetInvincible(false);
     }
 }

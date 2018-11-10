@@ -19,6 +19,8 @@ public class PhysicsObject : MonoBehaviour
     private readonly float rayEdgeMargin = 0.02f;
     private ContactFilter2D filter;
     private RaycastHit2D[] hits = new RaycastHit2D[4];
+    private bool isMoveable = true;
+    private bool isInvinclible;
 
 
     private void Start()
@@ -30,24 +32,27 @@ public class PhysicsObject : MonoBehaviour
 
     private void FixedUpdate()
     {
-        fixedDeltaTime = Time.fixedDeltaTime;
-        isGrounded = false;
-        GetNewCollisionRect();
+        if (isMoveable)
+        {
+            fixedDeltaTime = Time.fixedDeltaTime;
+            isGrounded = false;
+            GetNewCollisionRect();
 
-        // X
-        float deltaX = velocityX * fixedDeltaTime;
-        if (!MyUtility.NearlyEqual(deltaX, 0f))
-            deltaX = XAxisCollision(deltaX);
+            // X
+            float deltaX = velocityX * fixedDeltaTime;
+            if (!MyUtility.NearlyEqual(deltaX, 0f))
+                deltaX = XAxisCollision(deltaX);
 
-        // Y
-        float deltaY = 0;
-        velocityY += gravityScale * Physics2D.gravity.y * fixedDeltaTime;
-        velocityY = velocityY < maxFallSpeed ? maxFallSpeed : velocityY;
-        deltaY = velocityY <= 0 ?
-            YDownCollision(velocityY * fixedDeltaTime) :
-            YUpCollision(velocityY * fixedDeltaTime, ref deltaX);
+            // Y
+            float deltaY = 0;
+            velocityY += gravityScale * Physics2D.gravity.y * fixedDeltaTime;
+            velocityY = velocityY < maxFallSpeed ? maxFallSpeed : velocityY;
+            deltaY = velocityY <= 0 ?
+                YDownCollision(velocityY * fixedDeltaTime) :
+                YUpCollision(velocityY * fixedDeltaTime, ref deltaX);
 
-        transform.Translate(deltaX, deltaY, 0f);
+            transform.Translate(deltaX, deltaY, 0f);
+        }
     }
 
     private float XAxisCollision(float deltaX)
@@ -270,5 +275,20 @@ public class PhysicsObject : MonoBehaviour
     public bool IsGrounded()
     {
         return isGrounded;
+    }
+
+    public void SetMoveable(bool value)
+    {
+        isMoveable = value;
+    }
+
+    public void SetInvincible(bool value)
+    {
+        isInvinclible = value;
+    }
+
+    public bool GetInvincible()
+    {
+        return isInvinclible;
     }
 }

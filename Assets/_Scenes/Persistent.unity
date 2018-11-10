@@ -198,6 +198,8 @@ MonoBehaviour:
   minAnimationPlaybackMultiplier: 1
   smallMarioCollider: {fileID: 2134074813}
   bigMarioCollider: {fileID: 2134074815}
+  unMoveableDuration: 1
+  invincibleDuration: 1.5
 --- !u!114 &1626505110
 MonoBehaviour:
   m_ObjectHideFlags: 0
