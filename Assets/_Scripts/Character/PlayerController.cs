@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float minHorizontalSpeed = 1f;
     public float maxHorizontalSpeed = 5f;
     public float jumpSpeed = 20f;
+    public float bounceSpeed = 15f;
     public float maxJumpHoldTime = 0.5f;
     public float animationPlaybackMultiplier = 0.2f;
     public float minAnimationPlaybackMultiplier = 0.5f;
@@ -208,13 +209,18 @@ public class PlayerController : MonoBehaviour
 
     public void HitByEnemy()
     {
-        if (physicsObject.GetInvincible())
+        if (physicsObject.IsInvincible())
             return;
 
         if (isBigMario)
             ChangeToSmall();
         else
             Die();
+    }
+
+    public void BounceUponEnemy()
+    {
+        physicsObject.Move(physicsObject.GetVelocityX(), bounceSpeed);
     }
 
     private void Die()

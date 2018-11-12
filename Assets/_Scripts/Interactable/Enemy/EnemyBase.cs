@@ -12,6 +12,7 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
 
         if (from == Constants.HitDirection.Top)
         {
+            player.BounceUponEnemy();
             Die();
         }
         else

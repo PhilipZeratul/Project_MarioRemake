@@ -193,6 +193,7 @@ MonoBehaviour:
   minHorizontalSpeed: 2
   maxHorizontalSpeed: 9
   jumpSpeed: 11
+  bounceSpeed: 4
   maxJumpHoldTime: 0.27
   animationPlaybackMultiplier: 0.2
   minAnimationPlaybackMultiplier: 1

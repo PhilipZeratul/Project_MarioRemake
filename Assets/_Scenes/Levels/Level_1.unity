@@ -3095,10 +3095,56 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4215805173129268, guid: fe90d71b3caa64cc6b6f4191a7091823, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe90d71b3caa64cc6b6f4191a7091823, type: 2}
+  m_IsPrefabAsset: 0
+--- !u!1001 &1516765785
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -22.811
+      objectReference: {fileID: 0}
+    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804994305409370, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
+      propertyPath: m_Name
+      value: Mushbro (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &1745670255
 Prefab:

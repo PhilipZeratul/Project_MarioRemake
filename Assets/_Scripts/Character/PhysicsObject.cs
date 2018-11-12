@@ -143,12 +143,12 @@ public class PhysicsObject : MonoBehaviour
         {
             // If going downwards.
             isGrounded = true;
-
             velocityY = 0f;
-            deltaY = minDeltaY;
 
             if (hitTarget != null)
                 Hit(hitTarget, deltaY > 0 ? Constants.HitDirection.Bottom : Constants.HitDirection.Top);          
+
+            deltaY = minDeltaY;
         }
         return deltaY;
     }
@@ -164,12 +164,8 @@ public class PhysicsObject : MonoBehaviour
         float minDeltaY = float.MaxValue;
         GameObject hitTarget = null;
 
-
         int hitRayNo = 0;
         bool isMiddleHitGround = false;
-
-
-
 
         for (int i = 0; i < numOfRaysY; i++)
         {
@@ -256,7 +252,7 @@ public class PhysicsObject : MonoBehaviour
 
         if (interactableObj != null)
         {
-            //Debug.LogFormat("Hit: {0}, From: {1}", target.name, dir);
+            Debug.LogFormat("Hit: {0}, From: {1}", target.name, dir);
 
             interactableObj.IsHit(gameObject, dir);
         }
@@ -287,7 +283,7 @@ public class PhysicsObject : MonoBehaviour
         isInvinclible = value;
     }
 
-    public bool GetInvincible()
+    public bool IsInvincible()
     {
         return isInvinclible;
     }
