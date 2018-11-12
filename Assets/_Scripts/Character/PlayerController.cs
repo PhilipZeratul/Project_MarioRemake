@@ -241,4 +241,9 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         physicsObject.SetInvincible(false);
     }
+
+    public bool IsBigMario()
+    {
+        return isBigMario;
+    }
 }

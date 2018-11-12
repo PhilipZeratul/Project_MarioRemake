@@ -252,7 +252,7 @@ public class PhysicsObject : MonoBehaviour
 
         if (interactableObj != null)
         {
-            Debug.LogFormat("Hit: {0}, From: {1}", target.name, dir);
+            //Debug.LogFormat("Hit: {0}, From: {1}", target.name, dir);
 
             interactableObj.IsHit(gameObject, dir);
         }
