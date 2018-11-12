@@ -10,6 +10,7 @@ public class ControllerManager : MonoBehaviour
     private bool isJumpPressed;
     private bool isJumpHolding;
     private bool isSprintHolding;
+    private bool isDownHolding;
 
 
     private void Update()
@@ -21,6 +22,7 @@ public class ControllerManager : MonoBehaviour
             isJumpPressed = Input.GetButtonDown("Jump");
 
         isSprintHolding = Input.GetButton("Sprint");
+        isDownHolding = Input.GetButton("Down");
     }
 
     public float HorizontalInput()
@@ -48,5 +50,10 @@ public class ControllerManager : MonoBehaviour
     public bool SprintHolding()
     {
         return isSprintHolding;
+    }
+
+    public bool DownHolding()
+    {
+        return isDownHolding;
     }
 }

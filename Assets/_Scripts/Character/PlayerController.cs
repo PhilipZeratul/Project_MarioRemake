@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private float jumpStartTime;
     private bool isFacingRight = true;
     private bool isTurning;
+    private bool isCrouching;
     private float velocityX;
     private bool isBigMario;
     private WaitForSeconds waitForMoveable;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private readonly int isGroundedHash = Animator.StringToHash("IsGrounded");
     private readonly int isRunningHash = Animator.StringToHash("IsRunning");
     private readonly int isTurningHash = Animator.StringToHash("IsTurning");
+    private readonly int isCrouchingHash = Animator.StringToHash("IsCrouching");
     private readonly int runSpeedHash = Animator.StringToHash("RunSpeed");
     private readonly int isBigHash = Animator.StringToHash("IsBig");
     private readonly int triggerBigHash = Animator.StringToHash("TriggerToBig");
@@ -75,41 +77,53 @@ public class PlayerController : MonoBehaviour
         float maxSpeed = controllerManager.SprintHolding() ?
                              maxHorizontalSpeed + sprintAdder : maxHorizontalSpeed;
         float minSpeed = controllerManager.SprintHolding() ?
-                             minHorizontalSpeed + sprintAdder : minHorizontalSpeed;                                          
+                             minHorizontalSpeed + sprintAdder : minHorizontalSpeed;
 
-        if (isTurning)
+        // Crouching
+        if (controllerManager.DownHolding() && isBigMario && physicsObject.IsGrounded())
         {
-            if (MyUtility.NearlyEqual(velocityX, 0f))
-                isTurning = false;
-            else
-                accX = controllerManager.SprintHolding() ?
-                           -Mathf.Sign(velocityX) * horizontalAcc * 4f :
-                           -Mathf.Sign(velocityX) * horizontalAcc * 3f;
+            isCrouching = true;
+            if (!MyUtility.NearlyEqual(velocityX, 0f))
+                accX = -Mathf.Sign(velocityX) * horizontalAcc * 4f;
+
         }
         else
         {
-            // No Input
-            if (MyUtility.NearlyEqual(horizontalInput, 0f))
+            isCrouching = false;
+            if (isTurning)
             {
-                if (!MyUtility.NearlyEqual(velocityX, 0f))
-                    accX = -Mathf.Sign(velocityX) * horizontalAcc * 2f;
+                if (MyUtility.NearlyEqual(velocityX, 0f))
+                    isTurning = false;
+                else
+                    accX = controllerManager.SprintHolding() ?
+                               -Mathf.Sign(velocityX) * horizontalAcc * 4f :
+                               -Mathf.Sign(velocityX) * horizontalAcc * 3f;
             }
-            // Have Input
             else
             {
-                // Issue Turning
-                if (horizontalInput * velocityX < -0.1f)
+                // No Input
+                if (MyUtility.NearlyEqual(horizontalInput, 0f))
                 {
-                    isTurning = true;
+                    if (!MyUtility.NearlyEqual(velocityX, 0f))
+                        accX = -Mathf.Sign(velocityX) * horizontalAcc * 2f;
                 }
-                else if (Mathf.Abs(velocityX) < maxSpeed)                         
+                // Have Input
+                else
                 {
-                    accX = controllerManager.SprintHolding() ?
-                               Mathf.Sign(horizontalInput) * horizontalAcc * 2 :
-                               Mathf.Sign(horizontalInput) * horizontalAcc;
+                    // Issue Turning
+                    if (horizontalInput * velocityX < -0.1f)
+                    {
+                        isTurning = true;
+                    }
+                    else if (Mathf.Abs(velocityX) < maxSpeed)
+                    {
+                        accX = controllerManager.SprintHolding() ?
+                                   Mathf.Sign(horizontalInput) * horizontalAcc * 2 :
+                                   Mathf.Sign(horizontalInput) * horizontalAcc;
 
-                    if (Mathf.Abs(velocityX) < minSpeed)
-                        velocityX = Mathf.Sign(accX) * minSpeed;
+                        if (Mathf.Abs(velocityX) < minSpeed)
+                            velocityX = Mathf.Sign(accX) * minSpeed;
+                    }
                 }
             }
         }
@@ -126,6 +140,8 @@ public class PlayerController : MonoBehaviour
 
         if ((velocityX > 0 && !isFacingRight) || (velocityX < 0 && isFacingRight))
             Flip();
+
+        animator.SetBool(isCrouchingHash, isCrouching);
 
         if (!MyUtility.NearlyEqual(velocityX, 0f))
             animator.SetFloat(runSpeedHash, Mathf.Max(Mathf.Abs(animationPlaybackMultiplier * velocityX), minAnimationPlaybackMultiplier));            
