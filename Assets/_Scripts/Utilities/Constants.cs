@@ -15,4 +15,9 @@
         Top,
         Bottom
     }
+
+    public enum InjectIDs
+    {
+        Player
+    }
 }

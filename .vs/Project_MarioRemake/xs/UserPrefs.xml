@@ -1,15 +1,14 @@
 ﻿<Properties StartupConfiguration="{F19A09F7-5AE3-DFCA-24D3-F1F802084352}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/Interactable/Brick/Brick.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/GameControl/CameraFollow.cs">
     <Files>
-      <File FileName="Assets/_Scripts/Character/PhysicsObject.cs" Line="148" Column="35" />
-      <File FileName="Assets/_Scripts/Character/PlayerController.cs" Line="221" Column="32" />
-      <File FileName="Assets/_Scripts/GameControl/ControllerManager.cs" Line="57" Column="30" />
-      <File FileName="Assets/_Scripts/Interactable/Item/PowerupMushroom.cs" Line="12" Column="34" />
-      <File FileName="Assets/_Scripts/Utilities/Constants.cs" Line="8" Column="43" />
-      <File FileName="Assets/_Scripts/Interactable/Enemy/EnemyBase.cs" Line="6" Column="19" />
-      <File FileName="Assets/_Scripts/Interactable/Enemy/Mushbro.cs" Line="6" Column="1" />
-      <File FileName="Assets/_Scripts/Interactable/Brick/Brick.cs" Line="1" Column="1" />
+      <File FileName="Assets/_Scripts/GameControl/GlobalInstaller.cs" Line="16" Column="105" />
+      <File FileName="Assets/_Scripts/Character/PlayerController.cs" Line="17" Column="42" />
+      <File FileName="Assets/_Scripts/GameControl/GameManager.cs" Line="13" Column="85" />
+      <File FileName="Assets/_Scripts/Utilities/SceneReference.cs" Line="587" Column="7" />
+      <File FileName="Assets/_Scripts/GameControl/LevelManager.cs" Line="15" Column="63" />
+      <File FileName="Assets/_Scripts/Utilities/Constants.cs" Line="21" Column="15" />
+      <File FileName="Assets/_Scripts/GameControl/CameraFollow.cs" Line="6" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

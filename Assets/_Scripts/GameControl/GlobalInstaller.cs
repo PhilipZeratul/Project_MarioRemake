@@ -5,6 +5,7 @@ using Zenject;
 public class GlobalInstaller : MonoInstaller<GlobalInstaller>
 {
     public ControllerManager controllerManager;
+    public GameObject player;
 
 
     public override void InstallBindings()
@@ -12,5 +13,8 @@ public class GlobalInstaller : MonoInstaller<GlobalInstaller>
         //Debug.Log("Global Installer Binding.");
 
         Container.Bind<ControllerManager>().FromInstance(controllerManager).AsSingle();
+
+        GameObject playerGO = Instantiate(player);
+        Container.Bind<GameObject>().WithId(Constants.InjectIDs.Player).FromInstance(playerGO).AsSingle();
     }
 }

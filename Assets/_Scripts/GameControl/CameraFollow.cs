@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using Zenject;
 
 
 public class CameraFollow : MonoBehaviour
 {
-    public GameObject player;
     public float offset = 2f;
+
+    [Inject (Id = Constants.InjectIDs.Player)]
+    private GameObject player;
 
 
     private void LateUpdate()

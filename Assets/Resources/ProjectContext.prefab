@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerManager: {fileID: 114325998054930118}
+  player: {fileID: 1461360681473614, guid: beb2945120904452ba1a7d23a043b409, type: 2}
 --- !u!114 &114325998054930118
 MonoBehaviour:
   m_ObjectHideFlags: 1
