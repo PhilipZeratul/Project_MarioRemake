@@ -4,6 +4,7 @@ PlayerPath?
 SceneListBegin?
 Assets/_Scenes/Persistent.unity
 Assets/_Scenes/Levels/Level_1.unity
+Assets/_Scenes/Levels/Level_2.unity
 SceneListEnd?
 ad899e1c3a8d4773bfb99254fd9cd809 Zenject.dll:Zenject.SpaceFighter.ControlsDisplay
 486cd95c82d8305219c352c06b776e1f Zenject-IntegrationTests.dll:Zenject.Tests.Bindings.FromPrefabInstaller.Foo
@@ -181,7 +182,7 @@ f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 486cd95c82d8305219c352c06b776e1f Zenject-IntegrationTests.dll:Zenject.Tests.TestDestructionOrder.FooMonoBehaviourUnderSceneContext2
 119a8a757b4e12494e069bba17ff7841 Zenject.dll:Zenject.ProjectContext
 486cd95c82d8305219c352c06b776e1f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
-8c3a136e217941b22eb752de974d03ce Assembly-CSharp.dll:.GlobalInstaller
+27248f51a8820c534a19651fdc4c0eaa Assembly-CSharp.dll:.GlobalInstaller
 486cd95c82d8305219c352c06b776e1f Zenject.dll:Zenject.ProjectKernel
 486cd95c82d8305219c352c06b776e1f Zenject-IntegrationTests.dll:Zenject.Tests.Bindings.FromSubContainerPrefabResource.Bar
 486cd95c82d8305219c352c06b776e1f Zenject-IntegrationTests.dll:Zenject.Tests.Factories.BindFactoryFive.Foo
@@ -260,7 +261,7 @@ b4a8b3ed85775d50ba42bbbaa1fca507 Assembly-CSharp.dll:UnityEngine.Tilemaps.GridIn
 f5ece19966a893bd3def5b7aaf85514d Assembly-CSharp.dll:UnityEngine.Tilemaps.TerrainTile
 486cd95c82d8305219c352c06b776e1f Zenject.dll:Zenject.SpaceFighter.PlayerFacade
 486cd95c82d8305219c352c06b776e1f Zenject-IntegrationTests.dll:Zenject.Tests.Factories.BindFactoryOne.Foo
-ba4a816da15c31e2c868a87cecbc3ff2 Assembly-CSharp.dll:.CameraFollow
+87a5335e2ab70c3d9c216ebe2a52be23 Assembly-CSharp.dll:.CameraFollow
 486cd95c82d8305219c352c06b776e1f Zenject-IntegrationTests.dll:Zenject.Tests.Bindings.FromPrefab.Qux
 486cd95c82d8305219c352c06b776e1f Zenject.dll:Zenject.SpaceFighter.EnemyFacade
 5ef680b274545a24d2b49e2471e5820d Zenject.dll:Zenject.SpaceFighter.EnemyView
@@ -284,3 +285,5 @@ ada348c7cb5dbdfe54e5395372f4bd7e Zenject.dll:Zenject.Asteroids.Ship
 486cd95c82d8305219c352c06b776e1f Zenject-IntegrationTests.dll:Zenject.Tests.Bindings.FromPrefabResource.Norf2
 a8299cc092fdaac34516abb35102b3fc Zenject-IntegrationTests.dll:Zenject.Tests.Factories.PrefabFactory.Foo
 93ad2b09e44cd61054c8c309653dd0b4 Zenject.dll:Zenject.ZenjectBinding
+6728aca3eaa63b3bd8bbcea9b04a2b03 Assembly-CSharp.dll:.GameManager
+87269a214efaccf6cf8ff96f392ab3b5 Assembly-CSharp.dll:.LevelManager
