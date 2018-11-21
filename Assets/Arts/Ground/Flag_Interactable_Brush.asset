@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: Flag_Interactable_Brush
   m_EditorClassIdentifier: 
   m_Prefabs:
-  - {fileID: 1266454647806846, guid: 3f9418a3fec944146bcdfda84eb3fc54, type: 2}
+  - {fileID: 1023543966104208, guid: 3f9418a3fec944146bcdfda84eb3fc54, type: 2}
   m_PerlinScale: 0.5
   m_Z: 0

@@ -1,12 +1,14 @@
 ﻿<Properties StartupConfiguration="{F19A09F7-5AE3-DFCA-24D3-F1F802084352}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/GameControl/CameraFollow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/Interactable/Item/PowerupMushroom.cs">
     <Files>
-      <File FileName="Assets/_Scripts/GameControl/GlobalInstaller.cs" Line="18" Column="85" />
-      <File FileName="Assets/_Scripts/Character/PlayerController.cs" Line="17" Column="42" />
+      <File FileName="Assets/_Scripts/GameControl/GlobalInstaller.cs" Line="15" Column="88" />
+      <File FileName="Assets/_Scripts/Character/PlayerController.cs" Line="33" Column="32" />
       <File FileName="Assets/_Scripts/GameControl/GameManager.cs" Line="13" Column="85" />
       <File FileName="Assets/_Scripts/GameControl/LevelManager.cs" Line="15" Column="63" />
       <File FileName="Assets/_Scripts/GameControl/CameraFollow.cs" Line="10" Column="27" />
+      <File FileName="Assets/_Scripts/Interactable/Item/Flag.cs" Line="15" Column="20" />
+      <File FileName="Assets/_Scripts/Interactable/Item/PowerupMushroom.cs" Line="12" Column="34" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

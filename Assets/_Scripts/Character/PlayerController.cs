@@ -246,4 +246,9 @@ public class PlayerController : MonoBehaviour
     {
         return isBigMario;
     }
+
+    public void LevelFinished()
+    {
+
+    }
 }

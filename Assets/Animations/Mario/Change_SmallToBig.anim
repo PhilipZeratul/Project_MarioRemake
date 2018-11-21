@@ -33,7 +33,7 @@ AnimationClip:
     - time: 1
       value: {fileID: 21300000, guid: 153e3903d5b3841ce9d9c234931e50b5, type: 3}
     attribute: m_Sprite
-    path: 
+    path: Mario
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 60
