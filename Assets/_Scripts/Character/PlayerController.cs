@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Playables;
 using System.Collections;
 using Zenject;
 
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public Collider2D bigMarioCollider;
     public float unMoveableDuration = 1f;
     public float invincibleDuration = 1.5f;
+    public float climbFlagSpeed = 1f;
 
     private PhysicsObject physicsObject;
     private ControllerManager controllerManager;
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private WaitForSeconds waitForMoveable;
 
     private Animator animator;
+    private PlayableDirector playableDirector;
     private readonly int jumpHash = Animator.StringToHash("TriggerJump");
     private readonly int isGroundedHash = Animator.StringToHash("IsGrounded");
     private readonly int isRunningHash = Animator.StringToHash("IsRunning");
@@ -39,6 +42,7 @@ public class PlayerController : MonoBehaviour
     private readonly int isBigHash = Animator.StringToHash("IsBig");
     private readonly int triggerBigHash = Animator.StringToHash("TriggerToBig");
     private readonly int triggerSmallHash = Animator.StringToHash("TriggerToSmall");
+    private readonly int isClimbingFlag = Animator.StringToHash("IsClimbingFlag");
 
 
     [Inject]
@@ -51,6 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         physicsObject = GetComponent<PhysicsObject>();
         animator = GetComponentInChildren<Animator>();
+        playableDirector = GetComponent<PlayableDirector>();
 
         waitForMoveable = new WaitForSeconds(unMoveableDuration);
     }
@@ -247,8 +252,31 @@ public class PlayerController : MonoBehaviour
         return isBigMario;
     }
 
-    public void LevelFinished()
+    public void LevelStart()
     {
+        controllerManager.SetControllable(true);
+        physicsObject.SetGravity(true);
+    }
+
+    public void LevelFinish()
+    {
+        Debug.Log("LevelFinish()");
+
+        controllerManager.SetControllable(false);
+        physicsObject.SetGravity(false);
+        animator.SetBool(isClimbingFlag, true);
+
+        StartCoroutine(ClimbFlag());
+    }
+
+    private IEnumerator ClimbFlag()
+    {
+        while (!physicsObject.IsGrounded())
+        {
+            physicsObject.Move(0f, -climbFlagSpeed);
+            yield return new WaitForFixedUpdate();
+        }
+
 
     }
 }

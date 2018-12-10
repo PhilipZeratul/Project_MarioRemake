@@ -20,6 +20,7 @@ public class PhysicsObject : MonoBehaviour
     private ContactFilter2D filter;
     private RaycastHit2D[] hits = new RaycastHit2D[4];
     private bool isMoveable = true;
+    private bool hasGravity = true;
     private bool isInvinclible;
 
 
@@ -45,11 +46,17 @@ public class PhysicsObject : MonoBehaviour
 
             // Y
             float deltaY = 0;
-            velocityY += gravityScale * Physics2D.gravity.y * fixedDeltaTime;
-            velocityY = velocityY < maxFallSpeed ? maxFallSpeed : velocityY;
+            if (hasGravity)
+                velocityY += gravityScale * Physics2D.gravity.y * fixedDeltaTime;
+
+            velocityY = velocityY < maxFallSpeed ? maxFallSpeed : velocityY; // < because they are negative.
             deltaY = velocityY <= 0 ?
                 YDownCollision(velocityY * fixedDeltaTime) :
                 YUpCollision(velocityY * fixedDeltaTime, ref deltaX);
+
+
+            ///
+            Debug.LogFormat("YVelocity = {0}", velocityY);
 
             transform.Translate(deltaX, deltaY, 0f);
         }
@@ -276,6 +283,11 @@ public class PhysicsObject : MonoBehaviour
     public void SetMoveable(bool value)
     {
         isMoveable = value;
+    }
+
+    public void SetGravity(bool value)
+    {
+        hasGravity = value;
     }
 
     public void SetInvincible(bool value)

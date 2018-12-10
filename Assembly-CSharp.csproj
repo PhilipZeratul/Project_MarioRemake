@@ -75,10 +75,10 @@
     <Compile Include="Assets\_Scripts\GameControl\LevelManager.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Brick\Brick.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Brick\CoinBrick.cs" />
+    <Compile Include="Assets\_Scripts\Interactable\Brick\Flag.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Enemy\EnemyBase.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Enemy\Mushbro.cs" />
     <Compile Include="Assets\_Scripts\Interactable\IInteractableObject.cs" />
-    <Compile Include="Assets\_Scripts\Interactable\Item\Flag.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Item\PowerupMushroom.cs" />
     <Compile Include="Assets\_Scripts\Particle\SelfDestroyTimer.cs" />
     <Compile Include="Assets\_Scripts\Utilities\Constants.cs" />
@@ -94,7 +94,24 @@
     <Compile Include="Assets\3rd Party Assets\Tilemap\Tiles\Terrain Tile\Scripts\TerrainTile.cs" />
     <Compile Include="Assets\3rd Party Assets\Tilemap\Tiles\Weighted Random Tile\WeightedRandomTile.cs" />
     <None Include="Assets\3rd Party Assets\Tilemap\Tiles\Rule Tile\ScriptTemplates\NewCustomRuleTile.cs.txt" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\3rd Party Assets\Tilemap\Brushes\Tint Brush Smooth\Shaders\TintedTilemap.shader" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\3rd Party Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <Reference Include="Unity.2D.PixelPerfect.Editor">
       <HintPath>/Users/phillipzhang/Work/git/Project_MarioRemake/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
     </Reference>

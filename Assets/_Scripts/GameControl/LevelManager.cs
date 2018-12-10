@@ -13,5 +13,6 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         player.transform.position = playerSpawnPoint.position;
+        player.GetComponent<PlayerController>().LevelStart();
     }
 }

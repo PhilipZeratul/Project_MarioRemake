@@ -6,6 +6,7 @@ public class ControllerManager : MonoBehaviour
     public float minJumpTime = 0.5f;
     // Perhaps, respond differently according to game status.
     //~TODO: Consider input response carefully.
+    private bool isControllable = true;
     private float horizontalInput;
     private bool isJumpPressed;
     private bool isJumpHolding;
@@ -15,14 +16,30 @@ public class ControllerManager : MonoBehaviour
 
     private void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
+        if (isControllable)
+        {
+            horizontalInput = Input.GetAxis("Horizontal");
 
-        isJumpHolding = Input.GetButton("Jump");
-        if (!isJumpPressed)
-            isJumpPressed = Input.GetButtonDown("Jump");
+            isJumpHolding = Input.GetButton("Jump");
+            if (!isJumpPressed)
+                isJumpPressed = Input.GetButtonDown("Jump");
 
-        isSprintHolding = Input.GetButton("Sprint");
-        isDownHolding = Input.GetButton("Down");
+            isSprintHolding = Input.GetButton("Sprint");
+            isDownHolding = Input.GetButton("Down");
+        }
+        else
+        {
+            horizontalInput = 0f;
+            isJumpHolding = false;
+            isJumpPressed = false;
+            isSprintHolding = false;
+            isDownHolding = false;
+        }
+    }
+
+    public void SetControllable(bool isControllable)
+    {
+        this.isControllable = isControllable;
     }
 
     public float HorizontalInput()
