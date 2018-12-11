@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
     private PlayableDirector playableDirector;
+    private SpriteRenderer marioSprite;
+    private LevelManager levelManager;
+
     private readonly int jumpHash = Animator.StringToHash("TriggerJump");
     private readonly int isGroundedHash = Animator.StringToHash("IsGrounded");
     private readonly int isRunningHash = Animator.StringToHash("IsRunning");
@@ -56,6 +59,8 @@ public class PlayerController : MonoBehaviour
         physicsObject = GetComponent<PhysicsObject>();
         animator = GetComponentInChildren<Animator>();
         playableDirector = GetComponent<PlayableDirector>();
+        playableDirector.stopped += OnFinishCutSceneFinished;
+        marioSprite = GetComponentInChildren<SpriteRenderer>();
 
         waitForMoveable = new WaitForSeconds(unMoveableDuration);
     }
@@ -252,8 +257,12 @@ public class PlayerController : MonoBehaviour
         return isBigMario;
     }
 
-    public void LevelStart()
+    public void LevelStart(LevelManager manager)
     {
+        Debug.Log("LevelStart()");
+
+        levelManager = manager;
+        marioSprite.enabled = true;
         controllerManager.SetControllable(true);
         physicsObject.SetGravity(true);
     }
@@ -276,7 +285,15 @@ public class PlayerController : MonoBehaviour
             physicsObject.Move(0f, -climbFlagSpeed);
             yield return new WaitForFixedUpdate();
         }
+        animator.SetBool(isClimbingFlag, false);
 
+        // Play End Cut Scene
+        marioSprite.enabled = false;
+        playableDirector.Play();
+    }
 
+    private void OnFinishCutSceneFinished(PlayableDirector director)
+    {
+        levelManager.ToNextLevel();
     }
 }

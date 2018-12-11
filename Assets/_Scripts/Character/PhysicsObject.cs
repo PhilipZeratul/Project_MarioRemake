@@ -54,10 +54,6 @@ public class PhysicsObject : MonoBehaviour
                 YDownCollision(velocityY * fixedDeltaTime) :
                 YUpCollision(velocityY * fixedDeltaTime, ref deltaX);
 
-
-            ///
-            Debug.LogFormat("YVelocity = {0}", velocityY);
-
             transform.Translate(deltaX, deltaY, 0f);
         }
     }

@@ -13,6 +13,11 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         player.transform.position = playerSpawnPoint.position;
-        player.GetComponent<PlayerController>().LevelStart();
+        player.GetComponent<PlayerController>().LevelStart(this);
+    }
+
+    public void ToNextLevel()
+    {
+        Debug.Log("To Next Level!");
     }
 }
