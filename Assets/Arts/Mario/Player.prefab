@@ -149,7 +149,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00040531158, y: 0.91}
+  m_Offset: {x: -0.00040531158, y: 0.9086255}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -160,7 +160,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7494154, y: 1.8127065}
+  m_Size: {x: 0.7494154, y: 1.8154557}
   m_EdgeRadius: 0
 --- !u!61 &61884767917049664
 BoxCollider2D:
@@ -230,6 +230,8 @@ MonoBehaviour:
   unMoveableDuration: 1
   invincibleDuration: 1.5
   climbFlagSpeed: 8.5
+  smallMarioTimeline: {fileID: 11400000, guid: d7f02984d570d4862910731b3dde27e8, type: 2}
+  bigMarioTimeline: {fileID: 11400000, guid: 29a4c95fc8a6d43bd9a0b6ac473f3300, type: 2}
 --- !u!114 &114503012579719842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -441,7 +443,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1461360681473614}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: d7f02984d570d4862910731b3dde27e8, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 29a4c95fc8a6d43bd9a0b6ac473f3300, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -455,5 +457,9 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 0}
     value: {fileID: 0}
+  - key: {fileID: 114055068866353612, guid: 29a4c95fc8a6d43bd9a0b6ac473f3300, type: 2}
+    value: {fileID: 95804063883124814}
+  - key: {fileID: 114634152828642218, guid: 29a4c95fc8a6d43bd9a0b6ac473f3300, type: 2}
+    value: {fileID: 95804063883124814}
   m_ExposedReferences:
     m_References: []

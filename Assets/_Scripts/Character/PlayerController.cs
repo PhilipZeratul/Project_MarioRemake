@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public float unMoveableDuration = 1f;
     public float invincibleDuration = 1.5f;
     public float climbFlagSpeed = 1f;
+    public PlayableAsset smallMarioTimeline;
+    public PlayableAsset bigMarioTimeline;
 
     private PhysicsObject physicsObject;
     private ControllerManager controllerManager;
@@ -289,6 +291,11 @@ public class PlayerController : MonoBehaviour
 
         // Play End Cut Scene
         marioSprite.enabled = false;
+        playableDirector.playableAsset = isBigMario ? bigMarioTimeline : smallMarioTimeline;
+        foreach (PlayableBinding output in playableDirector.playableAsset.outputs)
+        {
+            playableDirector.SetGenericBinding(output.sourceObject, gameObject);
+        }
         playableDirector.Play();
     }
 
