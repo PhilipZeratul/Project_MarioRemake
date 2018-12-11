@@ -72,6 +72,14 @@ public class SceneReference : ISerializationCallbackReceiver
         }
     }
 
+    public string SceneName
+    {
+        get
+        {
+            return sceneAsset.name;
+        }
+    }
+
     public static implicit operator string(SceneReference sceneReference)
     {
         return sceneReference.ScenePath;
