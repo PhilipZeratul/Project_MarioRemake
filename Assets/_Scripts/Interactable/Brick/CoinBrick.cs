@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 
 public class CoinBrick : MonoBehaviour, IInteractableObject
@@ -7,10 +8,16 @@ public class CoinBrick : MonoBehaviour, IInteractableObject
     public GameObject coin;
     private GameObject spriteGO;
     private Animator animator;
+    private GameManager gameManager;
 
     private readonly int hitHash = Animator.StringToHash("Hit");
     private readonly int deadHash = Animator.StringToHash("Dead");
 
+    [Inject]
+    private void Init(GameManager gameManager)
+    {
+        this.gameManager = gameManager;
+    }
 
     private void Start()
     {
@@ -26,6 +33,10 @@ public class CoinBrick : MonoBehaviour, IInteractableObject
                 return;
 
             coinNum--;
+
+            gameManager.AddCoin(1);
+            gameManager.AddScore(200);
+
             Instantiate(coin, transform.position, transform.rotation);
             animator.SetTrigger(hitHash);
             if (coinNum < 1)

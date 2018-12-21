@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/_Scenes/Persistent.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/_Scenes/Levels/Level_1.unity
+    path: Assets/_Scenes/Levels/1-1.unity
     guid: 3a4de6b9a2f5848b5aebda599aa8feef
   - enabled: 1
-    path: Assets/_Scenes/Levels/Level_2.unity
+    path: Assets/_Scenes/Levels/1-2.unity
     guid: 80fa2bcbd509242aa912176904bc6258
   m_configObjects: {}

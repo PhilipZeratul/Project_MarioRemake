@@ -730,7 +730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf393826caf34685ae6064e8a70f744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpawnPoint: {fileID: 442774379}
+  playerSpawnPoint: {fileID: 12869086}
 --- !u!4 &467240369
 Transform:
   m_ObjectHideFlags: 0
@@ -13018,52 +13018,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4514354906974550, guid: e2e465aad2acf489d8108ab2293e5535,
     type: 2}
   m_PrefabInternal: {fileID: 1386647465}
---- !u!1001 &1413431751
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4215805173129268, guid: fe90d71b3caa64cc6b6f4191a7091823, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 144.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 4215805173129268, guid: fe90d71b3caa64cc6b6f4191a7091823, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4215805173129268, guid: fe90d71b3caa64cc6b6f4191a7091823, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4215805173129268, guid: fe90d71b3caa64cc6b6f4191a7091823, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4215805173129268, guid: fe90d71b3caa64cc6b6f4191a7091823, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4215805173129268, guid: fe90d71b3caa64cc6b6f4191a7091823, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4215805173129268, guid: fe90d71b3caa64cc6b6f4191a7091823, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4215805173129268, guid: fe90d71b3caa64cc6b6f4191a7091823, type: 2}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1425914978645186, guid: fe90d71b3caa64cc6b6f4191a7091823, type: 2}
-      propertyPath: m_Name
-      value: PowerupMushroom (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fe90d71b3caa64cc6b6f4191a7091823, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1001 &1483619078
 Prefab:
   m_ObjectHideFlags: 0
@@ -13435,52 +13389,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1838204890
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 141.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4072082542993008, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1804994305409370, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
-      propertyPath: m_Name
-      value: Mushbro (2)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 28b64f8dad32c4779af2e08f424b6dfe, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!4 &1939490053 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4964905773830700, guid: 3f9418a3fec944146bcdfda84eb3fc54,
