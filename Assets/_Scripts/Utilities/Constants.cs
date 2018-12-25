@@ -8,6 +8,11 @@
         public const string Item = "Item";
     }
 
+    public static class TagNames
+    {
+        public const string Player = "Player";
+    }
+
     public enum HitDirection
     {
         Left,
@@ -19,5 +24,14 @@
     public enum InjectIDs
     {
         Player
+    }
+
+    public enum EnemyMoveDireciton
+    {
+        Left,
+        Right,
+        Up,
+        Down,
+        Stop
     }
 }

@@ -1,7 +1,3 @@
-﻿using UnityEngine;
-
-
-public class Mushbro : EnemyBase
+﻿public class Mushbro : GroundEnemy
 {
-
 }

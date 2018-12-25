@@ -77,6 +77,8 @@
     <Compile Include="Assets\_Scripts\Interactable\Brick\CoinBrick.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Brick\Flag.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Enemy\EnemyBase.cs" />
+    <Compile Include="Assets\_Scripts\Interactable\Enemy\FlyingEnemy.cs" />
+    <Compile Include="Assets\_Scripts\Interactable\Enemy\GroundEnemy.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Enemy\Mushbro.cs" />
     <Compile Include="Assets\_Scripts\Interactable\IInteractableObject.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Item\PowerupMushroom.cs" />

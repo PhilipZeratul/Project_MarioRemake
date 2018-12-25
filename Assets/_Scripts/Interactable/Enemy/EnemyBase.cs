@@ -3,33 +3,61 @@
 
 public class EnemyBase : MonoBehaviour, IInteractableObject
 {
-    public Transform[] wayPoints;
     public float moveSpeed = 2f;
+    public Constants.EnemyMoveDireciton direction = Constants.EnemyMoveDireciton.Left;
 
-    private int currentWayPoint;
-    private PhysicsObject physicsObject;
+    protected bool isActive = false;
+    protected PhysicsObject physicsObject;
+    protected Vector3 velocity;
+
+    private Camera mainCamera;
+    private Vector3 viewportPosition;
 
 
     private void Start()
     {
-        if (wayPoints.Length > 0)
-            physicsObject = GetComponent<PhysicsObject>();
+        mainCamera = Camera.main;
+
+        physicsObject = GetComponent<PhysicsObject>();
+        if (physicsObject != null)
+            physicsObject.hitEvent += HitSelfReaction;
+  
+        velocity = Vector3.zero;
+        switch (direction)
+        {
+            case Constants.EnemyMoveDireciton.Left:
+                velocity.x = -moveSpeed;
+                velocity.y = 0;
+                break;
+            case Constants.EnemyMoveDireciton.Right:
+                velocity.x = moveSpeed;
+                velocity.y = 0;
+                break;
+            case Constants.EnemyMoveDireciton.Up:
+                velocity.x = 0;
+                velocity.y = moveSpeed;
+                break;
+            case Constants.EnemyMoveDireciton.Down:
+                velocity.x = 0;
+                velocity.y = -moveSpeed;
+                break;
+            case Constants.EnemyMoveDireciton.Stop:
+                velocity.x = 0;
+                velocity.y = 0;
+                break;
+            default:
+                Debug.LogErrorFormat("Enemy {0} move direction error!", gameObject);
+                break;
+        }
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        float fixedDeltaTime = Time.fixedDeltaTime;
-
-        if (wayPoints.Length > 0)
+        if (!isActive)
         {
-            Vector3 direction = (wayPoints[currentWayPoint].position - transform.position).normalized;
-            physicsObject.Move(direction.x * moveSpeed, direction.y * moveSpeed);
-
-            float distance = Vector3.Distance(transform.position, wayPoints[currentWayPoint].position);
-            if (distance < moveSpeed * fixedDeltaTime)
-                currentWayPoint = (currentWayPoint + 1) % wayPoints.Length;
-
-            Debug.LogFormat("currentWayPoint = {0}, direction = {3}, distance = {1}, threshold = {2}", currentWayPoint, distance, moveSpeed * fixedDeltaTime, direction);
+            viewportPosition = mainCamera.WorldToViewportPoint(transform.position);
+            if (viewportPosition.x > 0f && viewportPosition.x <= 1f)
+                isActive = true;
         }
     }
 
@@ -51,12 +79,47 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
                 player.HitByEnemy();
             }
         }
-        else
+    }
+
+    private void HitSelfReaction(GameObject target, Constants.HitDirection dir)
+    {
+        if (target.tag == Constants.TagNames.Player)
+            return;
+
+        // Return when hit wall
+        switch (direction)
         {
-            //~TODO: Return when hit wall.
-            //currentWayPoint--;
-            //if (currentWayPoint < 0)
-                //currentWayPoint = wayPoints.Length - 1;
+            case Constants.EnemyMoveDireciton.Left:
+                if (dir == Constants.HitDirection.Right)
+                {
+                    direction = Constants.EnemyMoveDireciton.Right;
+                    velocity.x = moveSpeed;
+                }
+                break;
+            case Constants.EnemyMoveDireciton.Right:
+                if (dir == Constants.HitDirection.Left)
+                {
+                    direction = Constants.EnemyMoveDireciton.Left;
+                    velocity.x = -moveSpeed;
+                }
+                break;
+            case Constants.EnemyMoveDireciton.Up:
+                if (dir == Constants.HitDirection.Bottom)
+                {
+                    direction = Constants.EnemyMoveDireciton.Down;
+                    velocity.y = -moveSpeed;
+                }
+                break;
+            case Constants.EnemyMoveDireciton.Down:
+                if (dir == Constants.HitDirection.Top)
+                {
+                    direction = Constants.EnemyMoveDireciton.Up;
+                    velocity.y = moveSpeed;
+                }
+                break;
+            default:
+                Debug.LogErrorFormat("Enemy {0} move direction error!", gameObject);
+                break;
         }
     }
 

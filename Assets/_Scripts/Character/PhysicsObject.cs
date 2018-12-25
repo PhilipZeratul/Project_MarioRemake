@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using System;
 
 
 public class PhysicsObject : MonoBehaviour
 {
+    public Action<GameObject, Constants.HitDirection> hitEvent;
     public float gravityScale = 1f;
     public float maxFallSpeed = -15f;
 
@@ -251,12 +253,16 @@ public class PhysicsObject : MonoBehaviour
 
     private void Hit(GameObject target, Constants.HitDirection dir)
     {
+        // Hit self reaction
+        if (hitEvent != null)
+            hitEvent(target, dir);
+
+        // Hit notify the other
         IInteractableObject interactableObj = target.GetComponent<IInteractableObject>();
 
         if (interactableObj != null)
         {
-            //Debug.LogFormat("Hit: {0}, From: {1}", target.name, dir);
-
+            //Debug.LogFormat("Object: {2}, Hit: {0}, From: {1}", target.name, dir, gameObject.name);
             interactableObj.IsHit(gameObject, dir);
         }
     }
