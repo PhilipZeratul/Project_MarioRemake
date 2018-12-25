@@ -132,7 +132,10 @@ public class PhysicsObject : MonoBehaviour
             for (int j = 0; j < count; j++)
             {
                 if (hits[j].transform.IsChildOf(transform))
-                    continue;                    
+                    continue;
+                // Remove those hits that fires inside other colliders.
+                if (MyUtility.NearlyEqual(hits[j].fraction, 0f))
+                    continue;
 
                 // Hit
                 float y = -(hits[j].distance - collisionRect.height / 2);

@@ -1,4 +1,7 @@
-﻿public class GroundEnemy : EnemyBase
+﻿using UnityEngine;
+
+
+public class GroundEnemy : EnemyBase
 {
     protected override void FixedUpdate()
     {

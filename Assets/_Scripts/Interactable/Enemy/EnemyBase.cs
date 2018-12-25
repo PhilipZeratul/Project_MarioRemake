@@ -67,6 +67,7 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
 
         if (player != null)
         {
+            Debug.Log("Flag 1");
             if (from == Constants.HitDirection.Top)
             {
                 player.BounceUponEnemy();
