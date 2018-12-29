@@ -6,18 +6,13 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
     public float moveSpeed = 2f;
     public Constants.EnemyMoveDireciton direction = Constants.EnemyMoveDireciton.Left;
 
-    protected bool isActive = false;
     protected PhysicsObject physicsObject;
     protected Vector3 velocity;
-
-    private Camera mainCamera;
-    private Vector3 viewportPosition;
+    protected bool isActive = false;
 
 
     private void Start()
-    {
-        mainCamera = Camera.main;
-
+    {    
         physicsObject = GetComponent<PhysicsObject>();
         if (physicsObject != null)
             physicsObject.hitEvent += HitSelfReaction;
@@ -48,16 +43,6 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
             default:
                 Debug.LogErrorFormat("Enemy {0} move direction error!", gameObject);
                 break;
-        }
-    }
-
-    protected virtual void FixedUpdate()
-    {
-        if (!isActive)
-        {
-            viewportPosition = mainCamera.WorldToViewportPoint(transform.position);
-            if (viewportPosition.x > 0f && viewportPosition.x <= 1f)
-                isActive = true;
         }
     }
 
@@ -127,5 +112,10 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
     protected void Die()
     {
         Debug.LogFormat("Enemy: {0} Die()", gameObject.name);
+    }
+
+    public void SetIsActive(bool isActive)
+    {
+        this.isActive = isActive;
     }
 }

@@ -68,10 +68,12 @@
     <Compile Include="Assets\_Scripts\Deprecated\StateMachine\ItemState.cs" />
     <Compile Include="Assets\_Scripts\Deprecated\StateMachine\PlayerMachine.cs" />
     <Compile Include="Assets\_Scripts\Deprecated\StateMachine\PlayerState.cs" />
+    <Compile Include="Assets\_Scripts\GameControl\ActivationMark.cs" />
     <Compile Include="Assets\_Scripts\GameControl\CameraFollow.cs" />
     <Compile Include="Assets\_Scripts\GameControl\ControllerManager.cs" />
     <Compile Include="Assets\_Scripts\GameControl\GameManager.cs" />
     <Compile Include="Assets\_Scripts\GameControl\GlobalInstaller.cs" />
+    <Compile Include="Assets\_Scripts\GameControl\KillZone.cs" />
     <Compile Include="Assets\_Scripts\GameControl\LevelManager.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Brick\Brick.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Brick\CoinBrick.cs" />

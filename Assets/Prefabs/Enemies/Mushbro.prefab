@@ -26,7 +26,7 @@ GameObject:
   m_Layer: 9
   m_Name: Mushbro
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -79,6 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 395ac194abf874866884e32c9cf1dd90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 2
+  direction: 0
 --- !u!114 &114434978489986546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -93,7 +95,7 @@ MonoBehaviour:
   gravityScale: 1
   maxFallSpeed: -15
   numOfRaysX: 4
-  numOfRaysY: 3
+  numOfRaysY: 2
   collider2d: {fileID: 61601710889703140}
   pushSpeed: 5
 --- !u!212 &212247078009391150
