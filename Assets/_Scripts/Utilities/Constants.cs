@@ -11,6 +11,7 @@
     public static class TagNames
     {
         public const string Player = "Player";
+        public const string GameManager = "GameManager";
     }
 
     public enum HitDirection

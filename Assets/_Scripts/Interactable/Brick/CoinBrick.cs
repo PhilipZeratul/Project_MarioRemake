@@ -22,7 +22,7 @@ public class CoinBrick : MonoBehaviour, IInteractableObject
     private void Start()
     {
         spriteGO = GetComponentInChildren<SpriteRenderer>().gameObject;
-        animator = GetComponent<Animator>();
+        animator = GetComponentInParent<Animator>();
     }
 
     public void IsHit(GameObject source, Constants.HitDirection from)
@@ -37,10 +37,15 @@ public class CoinBrick : MonoBehaviour, IInteractableObject
             gameManager.AddCoin(1);
             gameManager.AddScore(200);
 
-            Instantiate(coin, transform.position, transform.rotation);
+
             animator.SetTrigger(hitHash);
             if (coinNum < 1)
                 animator.SetBool(deadHash, true);
         }
+    }
+
+    public void SpawnCoin()
+    {
+        Instantiate(coin, spriteGO.transform.position, spriteGO.transform.rotation);
     }
 }

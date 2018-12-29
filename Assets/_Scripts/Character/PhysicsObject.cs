@@ -261,7 +261,7 @@ public class PhysicsObject : MonoBehaviour
             hitEvent(target, dir);
 
         // Hit notify the other
-        IInteractableObject interactableObj = target.GetComponent<IInteractableObject>();
+        IInteractableObject interactableObj = target.GetComponentRecursiveUp<IInteractableObject>();
 
         if (interactableObj != null)
         {

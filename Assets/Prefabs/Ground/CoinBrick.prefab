@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4006245080018388}
   - component: {fileID: 212422364017672664}
+  - component: {fileID: 61422919100587558}
   m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
@@ -35,9 +36,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4363958496485854}
-  - component: {fileID: 61968739236473302}
   - component: {fileID: 95415471814588016}
-  - component: {fileID: 114066010882536874}
+  - component: {fileID: 114021771542108386}
   m_Layer: 10
   m_Name: CoinBrick
   m_TagString: Untagged
@@ -72,12 +72,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61968739236473302
+--- !u!61 &61422919100587558
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1135805705875646}
+  m_GameObject: {fileID: 1106445034350624}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -115,7 +115,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114066010882536874
+--- !u!114 &114021771542108386
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 455651813
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9fabd3daeaab54f37843832b75812cdd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
