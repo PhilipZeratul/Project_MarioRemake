@@ -235,7 +235,7 @@ public class PlayerController : MonoBehaviour
         physicsObject.Move(physicsObject.GetVelocityX(), bounceSpeed);
     }
 
-    private void Die()
+    public void Die()
     {
         Debug.Log("Mario Die()");
     }

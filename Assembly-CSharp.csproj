@@ -73,7 +73,6 @@
     <Compile Include="Assets\_Scripts\GameControl\ControllerManager.cs" />
     <Compile Include="Assets\_Scripts\GameControl\GameManager.cs" />
     <Compile Include="Assets\_Scripts\GameControl\GlobalInstaller.cs" />
-    <Compile Include="Assets\_Scripts\GameControl\KillZone.cs" />
     <Compile Include="Assets\_Scripts\GameControl\LevelManager.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Brick\Brick.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Brick\CoinBrick.cs" />
@@ -84,6 +83,7 @@
     <Compile Include="Assets\_Scripts\Interactable\Enemy\Mushbro.cs" />
     <Compile Include="Assets\_Scripts\Interactable\IInteractableObject.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Item\PowerupMushroom.cs" />
+    <Compile Include="Assets\_Scripts\Interactable\KillZone.cs" />
     <Compile Include="Assets\_Scripts\Particle\SelfDestroyTimer.cs" />
     <Compile Include="Assets\_Scripts\Utilities\Constants.cs" />
     <Compile Include="Assets\_Scripts\Utilities\MyUtility.cs" />
