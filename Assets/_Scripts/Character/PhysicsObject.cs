@@ -23,6 +23,10 @@ public class PhysicsObject : MonoBehaviour
     private readonly float rayEdgeMargin = 0.02f;
     private ContactFilter2D filter;
     private RaycastHit2D[] hits = new RaycastHit2D[4];
+    private bool isXCollision, isYCollision;
+    private float xAmendDistance, yAmendDistance;
+    private float xRayDistance, yRayDistance;
+    private GameObject xCollisionGO, yCollisionGO;
     private bool isMoveable = true;
     private bool hasGravity = true;
     private bool isInvinclible;
@@ -43,6 +47,15 @@ public class PhysicsObject : MonoBehaviour
             isGrounded = false;
             GetNewCollisionRect();
 
+            isXCollision = false;
+            xAmendDistance = 0f;
+            xRayDistance = 0f;
+            xCollisionGO = null;
+            isYCollision = false;
+            yAmendDistance = 0f;
+            yRayDistance = 0f;
+            yCollisionGO = null;
+
             // X
             float deltaX = velocityX * fixedDeltaTime;
             if (!MyUtility.NearlyEqual(deltaX, 0f))
@@ -58,12 +71,15 @@ public class PhysicsObject : MonoBehaviour
                 YDownCollision(velocityY * fixedDeltaTime) :
                 YUpCollision(velocityY * fixedDeltaTime, ref deltaX);
 
+            ResolveCollision(ref deltaX, ref deltaY);
+
+
             transform.Translate(deltaX, deltaY, 0f);
         }
     }
 
     private float XAxisCollision(float deltaX)
-    {
+    {    
         Vector2 rayStartPoint = new Vector2(collisionRect.center.x, collisionRect.yMin + rayEdgeMargin);
         Vector2 rayEndPoint = new Vector2(collisionRect.center.x, collisionRect.yMax - rayEdgeMargin);
 
@@ -91,6 +107,7 @@ public class PhysicsObject : MonoBehaviour
                 {
                     minDeltaX = x;
                     hitTarget = hits[j].collider.gameObject;
+                    xRayDistance = hits[j].distance;
                 }
             }
         }
@@ -99,17 +116,16 @@ public class PhysicsObject : MonoBehaviour
             (deltaX < 0 && minDeltaX > deltaX))
         {
             velocityX = 0f;
-            deltaX = minDeltaX;
-         
-            if (hitTarget != null)
-                Hit(hitTarget, deltaX > 0 ? Constants.HitDirection.Left : Constants.HitDirection.Right);
+            isXCollision = true;
+            xAmendDistance = minDeltaX - deltaX;
+            xCollisionGO = hitTarget;
         }
 
         return deltaX;
     }
 
     private float YDownCollision(float deltaY)
-    {    
+    {
         Vector2 rayStartPoint = new Vector2(collisionRect.xMin + rayEdgeMargin, collisionRect.center.y);
         Vector2 rayEndPoint = new Vector2(collisionRect.xMax - rayEdgeMargin, collisionRect.center.y);
 
@@ -141,6 +157,7 @@ public class PhysicsObject : MonoBehaviour
                 {
                     minDeltaY = y;
                     hitTarget = hits[j].collider.gameObject;
+                    yRayDistance = hits[j].distance;
                 }
             }
         }
@@ -150,11 +167,9 @@ public class PhysicsObject : MonoBehaviour
             // If going downwards.
             isGrounded = true;
             velocityY = 0f;
-
-            if (hitTarget != null)
-                Hit(hitTarget, deltaY > 0 ? Constants.HitDirection.Bottom : Constants.HitDirection.Top);          
-
-            deltaY = minDeltaY;
+            isYCollision = true;
+            yAmendDistance = minDeltaY - deltaY;
+            yCollisionGO = hitTarget;
         }
         return deltaY;
     }
@@ -200,7 +215,8 @@ public class PhysicsObject : MonoBehaviour
                 {
                     minDeltaY = y;
                     hitTarget = hits[j].collider.gameObject;
-                    hitRayNo = i;
+                    hitRayNo = j;
+                    yRayDistance = hits[j].distance;
                 }
             }
         }
@@ -221,12 +237,41 @@ public class PhysicsObject : MonoBehaviour
             else
             {
                 velocityY = 0f;
-                deltaY = minDeltaY;
-                Hit(hitTarget, deltaY > 0 ? Constants.HitDirection.Bottom : Constants.HitDirection.Top);
+                isYCollision = true;
+                yAmendDistance = minDeltaY - deltaY;
+                yCollisionGO = hitTarget;
             }
 
         }
         return deltaY;
+    }
+
+    private void ResolveCollision(ref float deltaX, ref float deltaY)
+    {
+        if (isXCollision && isYCollision && xCollisionGO == yCollisionGO && xCollisionGO != null)
+        {
+            if (Math.Abs(xRayDistance) <= Math.Abs(yRayDistance))
+            {
+                xAmendDistance = 0f;
+                isXCollision = false;
+            }
+            else
+            {
+                yAmendDistance = 0f;
+                isYCollision = false;
+            }
+        }
+
+        if (isXCollision)
+        {
+            deltaX += xAmendDistance;
+            Hit(xCollisionGO, deltaX > 0 ? Constants.HitDirection.Left : Constants.HitDirection.Right);
+        }
+        if (isYCollision)
+        {
+            deltaY += yAmendDistance;
+            Hit(yCollisionGO, deltaY > 0 ? Constants.HitDirection.Bottom : Constants.HitDirection.Top);
+        }
     }
 
     private void GetNewCollisionRect()
