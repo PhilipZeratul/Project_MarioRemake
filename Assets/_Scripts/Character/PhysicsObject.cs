@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#define DEBUG_DRAW_RAY
+
+using UnityEngine;
 using System;
 
 
@@ -73,13 +75,11 @@ public class PhysicsObject : MonoBehaviour
         {
             float lerpAmount = (float)i / ((float)numOfRaysX - 1);
             Vector2 origin = Vector2.Lerp(rayStartPoint, rayEndPoint, lerpAmount);
+            Vector2 dir = new Vector2(Mathf.Sign(deltaX), 0f);
+           
+            DebugDrawRay(origin, dir, distance, Color.yellow);
 
-            ///
-            Vector2 end = origin + new Vector2(Mathf.Sign(deltaX), 0f) * distance;
-            Debug.DrawLine(origin, end, Color.yellow);
-            ///
-
-            int count = Physics2D.Raycast(origin, new Vector2(Mathf.Sign(deltaX), 0f), filter, hits, distance);
+            int count = Physics2D.Raycast(origin, dir, filter, hits, distance);
             for (int j = 0; j < count; j++)
             {
                 if (hits[j].transform.IsChildOf(transform))
@@ -122,11 +122,9 @@ public class PhysicsObject : MonoBehaviour
         {
             float lerpAmount = (float)i / ((float)numOfRaysY - 1);
             Vector2 origin = Vector2.Lerp(rayStartPoint, rayEndPoint, lerpAmount);
+            Vector2 dir = new Vector2(0f, Mathf.Sign(deltaY));
 
-            ///
-            Vector2 end = origin + new Vector2(0f, Mathf.Sign(deltaY)) * distance;
-            Debug.DrawLine(origin, end, Color.white);
-            ///
+            DebugDrawRay(origin, dir, distance, Color.white);
 
             int count = Physics2D.Raycast(origin, Vector2.down, filter, hits, distance);
             for (int j = 0; j < count; j++)
@@ -179,11 +177,9 @@ public class PhysicsObject : MonoBehaviour
         {
             float lerpAmount = (float)i / ((float)numOfRaysY - 1);
             Vector2 origin = Vector2.Lerp(rayStartPoint, rayEndPoint, lerpAmount);
+            Vector2 dir = new Vector2(0f, Mathf.Sign(deltaY));
 
-            ///
-            Vector2 end = origin + new Vector2(0f, Mathf.Sign(deltaY)) * distance;
-            Debug.DrawLine(origin, end, Color.white);
-            ///
+            DebugDrawRay(origin, dir, distance, Color.white);
 
             int count = Physics2D.Raycast(origin, Vector2.up, filter, hits, distance);
             for (int j = 0; j < count; j++)
@@ -303,5 +299,11 @@ public class PhysicsObject : MonoBehaviour
     public bool IsInvincible()
     {
         return isInvinclible;
+    }
+
+    [System.Diagnostics.Conditional("DEBUG_DRAW_RAY")]
+    private void DebugDrawRay(Vector2 origin, Vector2 dir, float distance, Color color)
+    {
+        Debug.DrawLine(origin, origin + dir * distance, color);
     }
 }
