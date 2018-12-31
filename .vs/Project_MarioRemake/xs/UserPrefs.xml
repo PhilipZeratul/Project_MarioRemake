@@ -1,13 +1,12 @@
 ﻿<Properties StartupConfiguration="{F19A09F7-5AE3-DFCA-24D3-F1F802084352}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/Character/PhysicsObject.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/Interactable/Enemy/EnemyBase.cs">
     <Files>
       <File FileName="Assets/_Scripts/GameControl/GlobalInstaller.cs" Line="9" Column="30" />
       <File FileName="Assets/_Scripts/Utilities/Constants.cs" Line="14" Column="57" />
-      <File FileName="Assets/_Scripts/Character/PhysicsObject.cs" Line="264" Column="53" />
+      <File FileName="Assets/_Scripts/Character/PhysicsObject.cs" Line="22" Column="32" />
       <File FileName="Assets/_Scripts/Character/PlayerController.cs" Line="233" Column="34" />
-      <File FileName="Assets/_Scripts/Interactable/Brick/CoinBrick.cs" Line="34" Column="13" />
-      <File FileName="Assets/_Scripts/Interactable/Item/PowerupMushroom.cs" Line="42" Column="47" />
-      <File FileName="Assets/_Scripts/Utilities/MyUtility.cs" Line="15" Column="61" />
+      <File FileName="Assets/_Scripts/Interactable/Item/PowerupMushroom.cs" Line="63" Column="5" />
+      <File FileName="Assets/_Scripts/Interactable/Enemy/EnemyBase.cs" Line="71" Column="50" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

@@ -69,7 +69,10 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
     private void HitSelfReaction(GameObject target, Constants.HitDirection dir)
     {
         if (target.tag == Constants.TagNames.Player)
+        {
+            IsHit(target.transform.root.gameObject, dir);
             return;
+        }
 
         // Return when hit wall
         switch (direction)

@@ -65,6 +65,7 @@ public class PowerupMushroom : MonoBehaviour, IInteractableObject
         if (target.tag == Constants.TagNames.Player)
         {
             IsHit(target.transform.root.gameObject, dir);
+            return;
         }
 
         if ((isMovingRight && dir == Constants.HitDirection.Left) ||
