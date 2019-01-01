@@ -66,11 +66,18 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
         }
     }
 
-    private void HitSelfReaction(GameObject target, Constants.HitDirection dir)
+    private void HitSelfReaction(GameObject target, Constants.HitDirection dir, bool isHitInside)
     {
         if (target.tag == Constants.TagNames.Player)
         {
             IsHit(target.transform.root.gameObject, dir);
+            return;
+        }
+
+
+        if (isHitInside && dir == Constants.HitDirection.Bottom && target.tag == Constants.TagNames.Brick)
+        {
+            Die();
             return;
         }
 
@@ -114,6 +121,7 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
     protected void Die()
     {
         Debug.LogFormat("Enemy: {0} Die()", gameObject.name);
+        Destroy(gameObject);
     }
 
     public void SetIsActive(bool isActive)

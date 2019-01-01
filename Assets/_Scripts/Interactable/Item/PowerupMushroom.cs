@@ -60,7 +60,7 @@ public class PowerupMushroom : MonoBehaviour, IInteractableObject
         }
     }
 
-    private void HitSelfReaction(GameObject target, Constants.HitDirection dir)
+    private void HitSelfReaction(GameObject target, Constants.HitDirection dir, bool isHitInside)
     {
         if (target.tag == Constants.TagNames.Player)
         {

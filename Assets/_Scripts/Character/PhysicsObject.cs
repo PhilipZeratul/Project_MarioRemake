@@ -6,7 +6,7 @@ using System;
 
 public class PhysicsObject : MonoBehaviour
 {
-    public Action<GameObject, Constants.HitDirection> hitEvent;
+    public Action<GameObject, Constants.HitDirection, bool> hitEvent;
     public float gravityScale = 1f;
     public float maxFallSpeed = -15f;
 
@@ -19,6 +19,7 @@ public class PhysicsObject : MonoBehaviour
     private float velocityY;
     private bool isGrounded;
     private float fixedDeltaTime;
+
     private Rect collisionRect;
     private readonly float rayEdgeMargin = 0.02f;
     private ContactFilter2D filter;
@@ -27,6 +28,7 @@ public class PhysicsObject : MonoBehaviour
     private float xAmendDistance, yAmendDistance;
     private float xRayDistance, yRayDistance;
     private GameObject xCollisionGO, yCollisionGO;
+
     private bool isMoveable = true;
     private bool hasGravity = true;
     private bool isInvinclible;
@@ -72,8 +74,6 @@ public class PhysicsObject : MonoBehaviour
                 YUpCollision(velocityY * fixedDeltaTime, ref deltaX);
 
             ResolveCollision(ref deltaX, ref deltaY);
-
-
             transform.Translate(deltaX, deltaY, 0f);
         }
     }
@@ -215,7 +215,7 @@ public class PhysicsObject : MonoBehaviour
                 {
                     minDeltaY = y;
                     hitTarget = hits[j].collider.gameObject;
-                    hitRayNo = j;
+                    hitRayNo = i;
                     yRayDistance = hits[j].distance;
                 }
             }
@@ -265,12 +265,12 @@ public class PhysicsObject : MonoBehaviour
         if (isXCollision)
         {
             deltaX += xAmendDistance;
-            Hit(xCollisionGO, deltaX > 0 ? Constants.HitDirection.Left : Constants.HitDirection.Right);
+            Hit(xCollisionGO, deltaX > 0 ? Constants.HitDirection.Left : Constants.HitDirection.Right, Math.Abs(xRayDistance) < (collisionRect.width / 2 - 0.05f));
         }
         if (isYCollision)
         {
             deltaY += yAmendDistance;
-            Hit(yCollisionGO, deltaY > 0 ? Constants.HitDirection.Bottom : Constants.HitDirection.Top);
+            Hit(yCollisionGO, deltaY > 0 ? Constants.HitDirection.Bottom : Constants.HitDirection.Top, Math.Abs(yRayDistance) < (collisionRect.height / 2 - 0.05f));
         }
     }
 
@@ -295,15 +295,14 @@ public class PhysicsObject : MonoBehaviour
         velocityY = inputVelocityY;
     }
 
-    private void Hit(GameObject target, Constants.HitDirection dir)
+    private void Hit(GameObject target, Constants.HitDirection dir, bool isHitInside)
     {
         // Hit self reaction
         if (hitEvent != null)
-            hitEvent(target, dir);
+            hitEvent(target, dir, isHitInside);
 
         // Hit notify the other
         IInteractableObject interactableObj = target.GetComponentRecursiveUp<IInteractableObject>();
-
         if (interactableObj != null)
         {
             //Debug.LogFormat("Object: {2}, Hit: {0}, From: {1}", target.name, dir, gameObject.name);

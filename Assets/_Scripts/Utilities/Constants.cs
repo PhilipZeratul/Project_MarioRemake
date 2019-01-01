@@ -12,6 +12,7 @@
     {
         public const string Player = "Player";
         public const string GameManager = "GameManager";
+        public const string Brick = "Brick";
     }
 
     public enum HitDirection
