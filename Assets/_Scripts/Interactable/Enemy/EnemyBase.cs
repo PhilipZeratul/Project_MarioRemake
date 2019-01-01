@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 
 public class EnemyBase : MonoBehaviour, IInteractableObject
@@ -9,14 +10,24 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
     protected PhysicsObject physicsObject;
     protected Vector3 velocity;
     protected bool isActive = false;
+    protected Animator animator;
+    protected GameManager gameManager;
 
+
+    [Inject]
+    private void Init(GameManager gameManager)
+    {
+        this.gameManager = gameManager;
+    }
 
     private void Start()
     {    
         physicsObject = GetComponent<PhysicsObject>();
         if (physicsObject != null)
             physicsObject.hitEvent += HitSelfReaction;
-  
+
+        animator = GetComponent<Animator>();
+
         velocity = Vector3.zero;
         switch (direction)
         {
@@ -89,6 +100,7 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
                 {
                     direction = Constants.EnemyMoveDireciton.Right;
                     velocity.x = moveSpeed;
+                    transform.localScale = new Vector3(-1f, transform.localScale.y, transform.localScale.z);
                 }
                 break;
             case Constants.EnemyMoveDireciton.Right:
@@ -96,6 +108,7 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
                 {
                     direction = Constants.EnemyMoveDireciton.Left;
                     velocity.x = -moveSpeed;
+                    transform.localScale = new Vector3(1f, transform.localScale.y, transform.localScale.z);
                 }
                 break;
             case Constants.EnemyMoveDireciton.Up:
@@ -118,11 +131,7 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
         }
     }
 
-    protected void Die()
-    {
-        Debug.LogFormat("Enemy: {0} Die()", gameObject.name);
-        Destroy(gameObject);
-    }
+    protected virtual void Die(){}
 
     public void SetIsActive(bool isActive)
     {

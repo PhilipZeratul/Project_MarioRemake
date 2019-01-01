@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer marioSprite;
     private LevelManager levelManager;
 
-    private readonly int jumpHash = Animator.StringToHash("TriggerJump");
+    private readonly int triggerJumpHash = Animator.StringToHash("TriggerJump");
     private readonly int isGroundedHash = Animator.StringToHash("IsGrounded");
     private readonly int isRunningHash = Animator.StringToHash("IsRunning");
     private readonly int isTurningHash = Animator.StringToHash("IsTurning");
@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
             physicsObject.Move(velocityX, jumpSpeed);
             jumpStartTime = Time.time;
 
-            animator.SetTrigger(jumpHash);
+            animator.SetTrigger(triggerJumpHash);
         }
         else if (physicsObject.GetVelocityY() > 0f && controllerManager.JumpHolding())
         {

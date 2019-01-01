@@ -1,13 +1,13 @@
 ﻿<Properties StartupConfiguration="{F19A09F7-5AE3-DFCA-24D3-F1F802084352}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/Interactable/Brick/CoinBrick.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/Interactable/Enemy/Mushbro.cs">
     <Files>
       <File FileName="Assets/_Scripts/GameControl/GlobalInstaller.cs" Line="9" Column="30" />
       <File FileName="Assets/_Scripts/Utilities/Constants.cs" Line="12" Column="6" />
-      <File FileName="Assets/_Scripts/Character/PhysicsObject.cs" Line="299" Column="6" />
-      <File FileName="Assets/_Scripts/Character/PlayerController.cs" Line="233" Column="34" />
-      <File FileName="Assets/_Scripts/Interactable/Enemy/EnemyBase.cs" Line="111" Column="65" />
-      <File FileName="Assets/_Scripts/Interactable/IInteractableObject.cs" Line="6" Column="62" />
-      <File FileName="Assets/_Scripts/Interactable/Brick/CoinBrick.cs" Line="30" Column="47" />
+      <File FileName="Assets/_Scripts/Character/PhysicsObject.cs" Line="35" Column="1" />
+      <File FileName="Assets/_Scripts/Character/PlayerController.cs" Line="50" Column="35" />
+      <File FileName="Assets/_Scripts/Interactable/Enemy/EnemyBase.cs" Line="20" Column="40" />
+      <File FileName="Assets/_Scripts/Interactable/Enemy/Mushbro.cs" Line="16" Column="9" />
+      <File FileName="Assets/_Scripts/Interactable/PointText.cs" Line="12" Column="54" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

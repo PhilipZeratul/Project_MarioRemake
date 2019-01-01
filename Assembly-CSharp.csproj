@@ -84,6 +84,7 @@
     <Compile Include="Assets\_Scripts\Interactable\IInteractableObject.cs" />
     <Compile Include="Assets\_Scripts\Interactable\Item\PowerupMushroom.cs" />
     <Compile Include="Assets\_Scripts\Interactable\KillZone.cs" />
+    <Compile Include="Assets\_Scripts\Interactable\PointText.cs" />
     <Compile Include="Assets\_Scripts\Particle\SelfDestroyTimer.cs" />
     <Compile Include="Assets\_Scripts\Utilities\Constants.cs" />
     <Compile Include="Assets\_Scripts\Utilities\MyUtility.cs" />
