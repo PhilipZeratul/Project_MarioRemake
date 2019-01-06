@@ -66,7 +66,7 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
             if (from == Constants.HitDirection.Top)
             {
                 player.BounceUponEnemy();
-                Die();
+                TreadDie();
             }
             else
             {
@@ -88,7 +88,7 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
 
         if (isHitInside && dir == Constants.HitDirection.Bottom && target.tag == Constants.TagNames.Brick)
         {
-            Die();
+            HitDie();
             return;
         }
 
@@ -131,7 +131,9 @@ public class EnemyBase : MonoBehaviour, IInteractableObject
         }
     }
 
-    protected virtual void Die(){}
+    protected virtual void TreadDie(){}
+
+    protected virtual void HitDie() { }
 
     public void SetIsActive(bool isActive)
     {

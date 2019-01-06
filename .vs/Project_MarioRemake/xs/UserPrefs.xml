@@ -1,12 +1,12 @@
 ﻿<Properties StartupConfiguration="{F19A09F7-5AE3-DFCA-24D3-F1F802084352}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/Interactable/Enemy/Mushbro.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/Character/PhysicsObject.cs">
     <Files>
       <File FileName="Assets/_Scripts/GameControl/GlobalInstaller.cs" Line="9" Column="30" />
       <File FileName="Assets/_Scripts/Utilities/Constants.cs" Line="12" Column="6" />
-      <File FileName="Assets/_Scripts/Character/PhysicsObject.cs" Line="35" Column="1" />
+      <File FileName="Assets/_Scripts/Character/PhysicsObject.cs" Line="298" Column="86" />
       <File FileName="Assets/_Scripts/Character/PlayerController.cs" Line="50" Column="35" />
-      <File FileName="Assets/_Scripts/Interactable/Enemy/EnemyBase.cs" Line="20" Column="40" />
-      <File FileName="Assets/_Scripts/Interactable/Enemy/Mushbro.cs" Line="16" Column="9" />
+      <File FileName="Assets/_Scripts/Interactable/Enemy/EnemyBase.cs" Line="95" Column="32" />
+      <File FileName="Assets/_Scripts/Interactable/Enemy/Mushbro.cs" Line="22" Column="70" />
       <File FileName="Assets/_Scripts/Interactable/PointText.cs" Line="12" Column="54" />
     </Files>
   </MonoDevelop.Ide.Workbench>

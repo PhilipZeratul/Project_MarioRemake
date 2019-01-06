@@ -8,15 +8,18 @@ public class Mushbro : GroundEnemy
     private readonly int triggerDieHash = Animator.StringToHash("TriggerDie");
 
 
-    protected override void Die()
+    protected override void TreadDie()
     {
         Debug.LogFormat("Enemy: {0} Die()", gameObject.name);
         gameManager.AddScore(100);
         PointText pointTextInstance = Instantiate(pointText, transform.position, new Quaternion());
         pointTextInstance.SetScore(100);
-
-        //TODO~: Set Score
         animator.SetTrigger(triggerDieHash);
+    }
+
+    protected override void HitDie()
+    {
+        //TODO:~ Need left or right information, flip and up and fall
     }
 
     public void Finish()

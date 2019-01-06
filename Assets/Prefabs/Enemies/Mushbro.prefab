@@ -162,6 +162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   direction: 0
+  pointText: {fileID: 114491123168815740, guid: 4636bd77fb38b46aaaec5b35da07b0ed,
+    type: 2}
 --- !u!114 &114434978489986546
 MonoBehaviour:
   m_ObjectHideFlags: 1
